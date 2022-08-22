@@ -1,0 +1,18 @@
+{{#extend "layout"}}
+    {{#content "head" mode="append"}}
+        <title>404</title>
+        <link rel="stylesheet" href="../scss/error.scss" />
+    {{/content}}
+
+    {{#content "body"}}
+        <div class="container-error">
+            <div class="container-error__information">
+                <h1 class="container-error__title">404</h1>
+                <p class="container-error__description">Не туда попали</p>
+            </div>
+            <div class="container-error__link">
+                <a href="chats.hbs">Назад к чатам</a>
+            </div>
+        </div>
+    {{/content}}
+{{/extend}}

@@ -1,0 +1,37 @@
+{{#extend "layout"}}
+    {{#content "head" mode="append"}}
+        <title>Профиль</title>
+        <link rel="stylesheet" href="../scss/profile.scss" />
+    {{/content}}
+
+    {{#content "body"}}
+        <div class="column__left">
+            <a href="chats.hbs"><-</a>
+        </div>
+        <div class="column__right">
+            <div class="profile">
+                <div class="profile-information__image"></div>
+                <div class="profile-information__username">Иван</div>
+                <div class="profile-information__items">
+                    {{> profile_items title="Почта" value="pochta@yandex.ru" }}
+                    {{> profile_items title="Логин" value="ivanivanov" }}
+                    {{> profile_items title="Имя" value="Иван" }}
+                    {{> profile_items title="Фамилия" value="Иванов" }}
+                    {{> profile_items title="Имя в чате" value="Иван" }}
+                    {{> profile_items title="Телефон" value="+7 (909) 967 30 30" }}
+                </div>
+                <div class="profile-edit__items">
+                    <div class="edit-item">
+                        <a class="edit-item__link" href="profile_change_information.hbs">Изменить данные</a>
+                    </div>
+                    <div class="edit-item">
+                        <a class="edit-item__link" href="profile_change_password.hbs">Изменить пароль</a>
+                    </div>
+                    <div class="edit-item">
+                        <a class="edit-item__link text-danger">Выйти</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/content}}
+{{/extend}}

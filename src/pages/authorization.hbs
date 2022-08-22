@@ -1,0 +1,26 @@
+{{#extend "layout"}}
+    {{#content "head" mode="append"}}
+        <title>Авторизация</title>
+        <link rel="stylesheet" href="../scss/authorization.scss" />
+    {{/content}}
+
+    {{#content "body"}}
+        <div class="authorization">
+            <h2 class="authorization__title">
+                Вход
+            </h2>
+
+            <form class="authorization-form">
+                <div class="authorization-form__inputs">
+                    {{> form_items label_title="Логин" input_type="email" input_name="login" input_value="" input_placeholder="Логин" error_text="Неверный логин" }}
+                    {{> form_items label_title="Пароль" input_type="password" input_name="password" input_value="" input_placeholder="Пароль" }}
+                </div>
+
+                <div class="authorization-form__buttons">
+                    <button class="authorization-form__submit button">Войти</button>
+                    <a href="registration.hbs">Нет аккаунта?</a>
+                </div>
+            </form>
+        </div>
+    {{/content}}
+{{/extend}}
