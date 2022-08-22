@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "parcel src/pages/index.hbs --no-cache",
-    "start": "parcel build src/pages/index.hbs --no-cache && node ./server.js"
+    "start": "parcel build src/pages/index.hbs --no-cache && node ./server.js",
+    "build": "parcel build src/pages/index.hbs --no-cache",
+    "dev": "parcel src/pages/index.hbs --no-cache"
   },
   "repository": {
     "type": "git",
