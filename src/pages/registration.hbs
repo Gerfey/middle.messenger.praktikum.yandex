@@ -1,0 +1,31 @@
+{{#extend "layout"}}
+    {{#content "head" mode="append"}}
+        <title>Регистрация</title>
+        <link rel="stylesheet" href="../scss/registration.scss" />
+    {{/content}}
+
+    {{#content "body"}}
+        <div class="registration">
+            <h2 class="registration__title">
+                Регистрация
+            </h2>
+
+            <form class="registration-form">
+                <div class="registration-form__inputs">
+                    {{> form_items label_title="Почта" input_type="email" input_name="email" input_value="" input_placeholder="Почта" }}
+                    {{> form_items label_title="Логин" input_type="text" input_name="login" input_value="" input_placeholder="Логин" }}
+                    {{> form_items label_title="Имя" input_type="text" input_name="first_name" input_value="" input_placeholder="Имя" }}
+                    {{> form_items label_title="Фамилия" input_type="text" input_name="second_name" input_value="" input_placeholder="Фамилия" }}
+                    {{> form_items label_title="Телефон" input_type="tel" input_name="phone" input_value="" input_placeholder="Телефон" }}
+                    {{> form_items label_title="Пароль" input_type="password" input_name="password" input_value="" input_placeholder="Пароль" }}
+                    {{> form_items label_title="Пароль (еще раз)" input_type="password" input_name="password_repeat" input_value="" input_placeholder="Пароль (еще раз)" error_text="Пароли не совпадают" }}
+                </div>
+
+                <div class="registration-form__buttons">
+                    <button class="registration-form__submit button">Зарегистрироваться</button>
+                    <a href="authorization.hbs">Войти</a>
+                </div>
+            </form>
+        </div>
+    {{/content}}
+{{/extend}}
