@@ -1,0 +1,16 @@
+<form class="registration-form">
+    <div class="registration-form__inputs">
+        {{{ FormRegistrationItem title="Почта" input_type="email" input_name="email" input_value="" input_placeholder="Почта" }}}
+        {{{ FormRegistrationItem title="Логин" input_type="text" input_name="login" input_value="" input_placeholder="Логин" }}}
+        {{{ FormRegistrationItem title="Имя" input_type="text" input_name="first_name" input_value="" input_placeholder="Имя" }}}
+        {{{ FormRegistrationItem title="Фамилия" input_type="text" input_name="second_name" input_value="" input_placeholder="Фамилия" }}}
+        {{{ FormRegistrationItem title="Телефон" input_type="tel" input_name="phone" input_value="" input_placeholder="Телефон" }}}
+        {{{ FormRegistrationItem title="Пароль" input_type="password" input_name="password" input_value="" input_placeholder="Пароль" }}}
+        {{{ FormRegistrationItem title="Пароль (еще раз)" input_type="password" input_name="password_repeat" input_value="" input_placeholder="Пароль (еще раз)" error_text="Пароли не совпадают" }}}
+    </div>
+
+    <div class="registration-form__buttons">
+        <button class="registration-form__submit button">Зарегистрироваться</button>
+        <a href="/authorization">Войти</a>
+    </div>
+</form>

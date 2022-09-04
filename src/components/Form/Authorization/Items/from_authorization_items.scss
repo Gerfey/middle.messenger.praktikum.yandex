@@ -1,0 +1,49 @@
+@import "src/scss/variables";
+
+.authorization-form {
+  .form-item {
+    display: flex;
+    flex-direction: column;
+    padding-top: 16px;
+
+    &__label {
+      display: none;
+      color: $color-gray;
+      font-size: 9px;
+      line-height: 9px;
+    }
+
+    &__input {
+      width: 100%;
+      padding: 7px 0;
+      border-bottom: 1px solid #3369F3;
+
+      &::placeholder {
+        color: $color-gray;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    &__span {
+      display: none;
+      color: $color-red;
+      padding: 7px 0;
+      font-weight: 400;
+      font-size: 8px;
+      line-height: 8px;
+    }
+
+    &:last-child {
+      padding-bottom: 150px;
+    }
+  }
+}
+
+
+
+
+
+

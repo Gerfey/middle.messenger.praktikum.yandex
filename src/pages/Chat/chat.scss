@@ -1,0 +1,30 @@
+@import "../../scss/variables";
+
+#app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.registration {
+  width: 340px;
+  margin: 0 auto;
+  padding: 30px;
+  background: $color-white;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
+  border-radius: 12px;
+
+  &__title {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 20px;
+    text-align: center;
+    padding: 20px 0;
+  }
+}
+
+
+
+
+
