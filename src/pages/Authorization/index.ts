@@ -3,6 +3,10 @@ import Components from "../../utils/Components";
 import './authorization.scss';
 import {FormAuthorization} from "../../components/Form/Authorization";
 
+import {registerComponent} from "../../utils/registerComponent";
+
+registerComponent('FormAuthorization', FormAuthorization as any);
+
 interface AuthorizationPageProps {
 
 }
@@ -14,10 +18,6 @@ export class AuthorizationPage extends Components<AuthorizationPageProps> {
     }
 
     protected render(): DocumentFragment {
-
-        // @ts-ignore
-        this.setChildren('form_authorization', new FormAuthorization());
-
         return this.compile(template, {children: this.children});
     }
 }

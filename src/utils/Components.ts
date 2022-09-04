@@ -54,10 +54,6 @@ class Components<T = any> {
     compile(template: (context: any) => string, context: any) {
         const contextAndStubs = {...context};
 
-        Object.entries(this.children).forEach(([name, component]) => {
-            contextAndStubs[name] = `<div data-id="${component.id}" />`;
-        });
-
         const html = template(contextAndStubs);
 
         const tempFragment = document.createElement('template');

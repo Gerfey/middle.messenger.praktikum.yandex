@@ -2,6 +2,9 @@ import template from "./registration.hbs";
 import Components from "../../utils/Components";
 import './registration.scss';
 import {FormRegistration} from "../../components/Form/Registration";
+import {registerComponent} from "../../utils/registerComponent";
+
+registerComponent('FormRegistration', FormRegistration as any);
 
 interface RegistrationPageProps {
 
@@ -14,10 +17,6 @@ export class RegistrationPage extends Components<RegistrationPageProps> {
     }
 
     protected render(): DocumentFragment {
-
-        // @ts-ignore
-        this.setChildren('form_registration', new FormRegistration());
-
         return this.compile(template, {children: this.children});
     }
 }
