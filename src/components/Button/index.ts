@@ -2,19 +2,24 @@ import Components from "../../utils/Components";
 import template from "./button.hbs";
 
 interface ButtonProps {
-    label: string,
-    events: {
-        click: () => void;
-    }
+    label: string;
+    className: string;
+    onClick?: () => void;
 }
 
 // @ts-ignore
 export class Button extends Components<ButtonProps> {
-    constructor(props: ButtonProps) {
-        super(props);
+    constructor({onClick, label, className}: ButtonProps) {
+        super({
+            label,
+            className,
+            events: {
+                click: onClick
+            }
+        });
     }
 
     protected render() {
-        return this.compile(template, this.getProps());
+        return this.compile(template, this.props);
     }
 }

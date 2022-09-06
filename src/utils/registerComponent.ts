@@ -5,20 +5,29 @@ import Handlebars from "handlebars/dist/handlebars.runtime";
 
 // @ts-ignore
 export function registerComponent(name: string, Component: typeof Components): HelperOptions {
-    console.log(name, 'components');
     // @ts-ignore
     Handlebars.registerHelper(name, ({data, fn, hash}) => {
-        const component = new Component(hash);
-
         if (!data.root.children) {
             data.root.children = {};
         }
 
+        if (!data.root.refs) {
+            data.root.refs = {};
+        }
+
+        const { children } = data.root;
+
+        const component = new Component(hash);
+
+        if (hash.ref) {
+            data.root.refs[hash.ref] = component;
+        }
+
+        children[component.id] = component;
+
         // @ts-ignore
-        data.root.children[component.id] = component.getContent();
+        const contents = fn ? fn(this) : '';
 
-        console.log(data.root.children);
-
-        return component.getContent()?.outerHTML;
+        return `<div data-id="id-${component.id}">${contents}</div>`;
     });
 }

@@ -1,23 +1,25 @@
-import template from "./item.hbs";
-import Components from "../../../utils/Components";
+import Components from "../../utils/Components";
+import template from "./input.hbs";
 
-interface ProfileItemsProps {
+interface InputProps {
     className: string,
     name: string;
     type?: string;
     placeholder?: string;
     onFocus?: () => void;
     onBlur?: () => void;
+    onInput?: () => void;
 }
 
 // @ts-ignore
-export class ProfileItems extends Components<ProfileItemsProps> {
-    constructor({onFocus, onBlur, ...props}: ProfileItemsProps) {
+export class Input extends Components<ButtonProps> {
+    constructor({onFocus, onBlur, onInput, ...props}: InputProps) {
         super({
             ...props,
             events: {
                 focus: onFocus,
                 blur: onBlur,
+                input: onInput,
             }
         });
     }

@@ -12,8 +12,9 @@ class Components<T = any> {
         FLOW_ADD_EVENTS: "flow:add-events",
     };
 
-    id = null;
+    id = makeUUID();
     children: Record<string, Components>;
+    refs: Record<string, Components> = {};
 
     _element: HTMLElement | null = null;
     _meta: { props: any };
@@ -21,24 +22,20 @@ class Components<T = any> {
     props: Record<string, any>;
 
     constructor(propsAndChildren: object = {}) {
+        const eventBus = new EventBus();
         const {children, props} = this._getChildren(propsAndChildren);
 
         this.children = children;
-
-        const eventBus = new EventBus();
 
         this._meta = {
             props
         };
 
-        this.id = makeUUID();
-
-        this.props = this._makePropsProxy({...props, __id: this.id});
+        this.props = this._makePropsProxy(props);
 
         this._eventBus = () => eventBus;
 
         this._registerEvents(eventBus);
-
         eventBus.emit(Components.EVENTS.INIT);
     }
 
@@ -52,24 +49,30 @@ class Components<T = any> {
     }
 
     compile(template: (context: any) => string, context: any) {
-        const contextAndStubs = {...context};
-
-        const html = template(contextAndStubs);
+        const html = template({...context, children: this.children, refs: this.refs });
 
         const tempFragment = document.createElement('template');
 
         tempFragment.innerHTML = html;
 
         Object.entries(this.children).forEach(([_, component]) => {
+
             // @ts-ignore
-            const stub = tempFragment.content.querySelector(`[data-id="${component.id}"]`);
+            const stub = tempFragment.content.querySelector(`[data-id="id-${component.id}"]`);
 
             if (!stub) {
                 return;
             }
 
+            const content = component.getContent()!;
+
             // @ts-ignore
-            stub.replaceWith(component.getContent()!);
+            stub.replaceWith(content);
+
+            if (stub.childNodes.length) {
+                // @ts-ignore
+                content.append(...stub.childNodes);
+            }
         });
 
         return tempFragment.content;
@@ -97,35 +100,12 @@ class Components<T = any> {
         Object.assign(this.props, nextProps);
     };
 
-    setChildren = (element: string, value: Record<string, Components>) => {
-        if (!value) {
-            return;
-        }
-
-        // @ts-ignore
-        this.children[element] = value;
-    };
-
-    getProps = () => {
-        return this.props;
-    };
-
     get element() {
         return this._element;
     }
 
     render(): DocumentFragment {
         return new DocumentFragment();
-    }
-
-    show() {
-        // @ts-ignore
-        this.getContent().style.display = "block";
-    }
-
-    hide() {
-        // @ts-ignore
-        this.getContent().style.display = "none";
     }
 
     _render() {

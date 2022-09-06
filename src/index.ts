@@ -9,14 +9,24 @@ import {Error500Page} from "./pages/Error/500";
 import {ChatPage} from "./pages/Chat";
 
 import {registerComponent} from "./utils/registerComponent";
-import {Button} from "./components/Button";
-import {ProfileItems} from "./components/Profile/Item";
-import {ProfileChangePasswordPage} from "./pages/Profile/ChangePassword";
 
+import {ProfileChangePasswordPage} from "./pages/Profile/ChangePassword";
+import {Button} from "./components/Button";
+import {Link} from "./components/Link";
+import {FormItem} from "./components/FormItem";
+import {Input} from "./components/Input";
+import {Error} from "./components/Error";
+import {ProfileItems} from "./components/Profile/Item";
+
+registerComponent('Error', Error as any);
 registerComponent('Button', Button as any);
+registerComponent('Input', Input as any);
+registerComponent('Link', Link as any);
+registerComponent('FormItem', FormItem as any);
 registerComponent('ProfileItems', ProfileItems as any);
 
 window.addEventListener('DOMContentLoaded', () => {
+
     const root = document.querySelector('#app');
 
     const path = window.location.pathname;

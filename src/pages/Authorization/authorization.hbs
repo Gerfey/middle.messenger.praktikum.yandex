@@ -1,7 +1,16 @@
 <div class="authorization">
-    <h2 class="authorization__title">
-        Вход
-    </h2>
+    <div class="card">
+        <h2 class="card-title">Вход</h2>
+        <form class="card-form">
+            <div class="card-form__inputs">
+                {{{ FormItem className="form-item" label="Логин" name="login" type="email" validation="login" }}}
+                {{{ FormItem className="form-item" label="Пароль" name="password" type="password" validation="password" }}}
+            </div>
 
-    {{{ FormAuthorization }}}
+            <div class="card-form__buttons">
+                {{{ Button label="Войти" className="card-form__submit" onClick=sendValues }}}
+                {{# Link to="/registration" className="card-form__link" }}Нет аккаунта?{{/Link}}
+            </div>
+        </form>
+    </div>
 </div>

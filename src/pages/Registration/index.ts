@@ -1,22 +1,61 @@
 import template from "./registration.hbs";
 import Components from "../../utils/Components";
 import './registration.scss';
-import {FormRegistration} from "../../components/Form/Registration";
-import {registerComponent} from "../../utils/registerComponent";
-
-registerComponent('FormRegistration', FormRegistration as any);
-
-interface RegistrationPageProps {
-
-}
+import {Validator} from "../../utils/Validator";
 
 // @ts-ignore
-export class RegistrationPage extends Components<RegistrationPageProps> {
-    constructor(props: RegistrationPageProps = {}) {
-        super(props);
+export class RegistrationPage extends Components {
+    constructor() {
+        super({
+            sendValues: () => {
+                const element = this.getContent();
+
+                const form = element?.querySelector('form');
+
+                if (form !== undefined) {
+                    const formInputs = form?.querySelectorAll('.form-item');
+
+                    const data: Record<string, unknown> = {};
+
+                    const validator = new Validator();
+
+                    let sendForm = true;
+                    // @ts-ignore
+                    Array.from(formInputs).forEach((formInput) => {
+
+                        let input = formInput?.querySelector('input');
+
+                        if (input) {
+                            data[input.name] = input.value;
+
+                            let result = validator.validate(input.name, input.value)
+
+                            let error = formInput?.querySelector('.form-item__div');
+                            // @ts-ignore
+                            if (result.result === false) {
+
+                                if (error !== undefined) {
+                                    // @ts-ignore
+                                    error.textContent = result.message;
+                                }
+
+                                sendForm = false;
+                            }else {
+                                // @ts-ignore
+                                error.textContent = '';
+                            }
+                        }
+                    });
+
+                    if (sendForm) {
+                        console.log(data);
+                    }
+                }
+            }
+        });
     }
 
     protected render(): DocumentFragment {
-        return this.compile(template, {children: this.children});
+        return this.compile(template, this.props);
     }
 }
