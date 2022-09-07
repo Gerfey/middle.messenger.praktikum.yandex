@@ -1,6 +1,6 @@
 import EventBus from './EventBus';
 
-import {v4 as makeUUID} from 'uuid';
+import {nanoid} from 'nanoid';
 
 class Components<T = any> {
     public static EVENTS = {
@@ -11,7 +11,7 @@ class Components<T = any> {
         FLOW_ADD_EVENTS: 'flow:add-events',
     };
 
-    id = makeUUID();
+    id = nanoid(6);
     children: Record<string, Components>;
     refs: Record<string, Components> = {};
 
