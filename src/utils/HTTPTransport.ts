@@ -18,7 +18,7 @@ export default class HTTPTransport {
         this.endpoint = endpoint;
     }
 
-    public get<Response>(path: string = '/'): Promise<Response> {
+    public get<Response>(path = '/'): Promise<Response> {
         return this.request<Response>(this.endpoint + path);
     }
 
@@ -56,8 +56,7 @@ export default class HTTPTransport {
             const xhr = new XMLHttpRequest();
             xhr.open(method, url);
 
-            xhr.onreadystatechange = (e) => {
-
+            xhr.onreadystatechange = () => {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status < 400) {
                         resolve(xhr.response);

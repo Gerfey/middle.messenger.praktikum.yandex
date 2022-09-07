@@ -1,33 +1,37 @@
-import Components from "./Components";
+import Components from './Components';
 import {HelperOptions} from 'handlebars';
-// @ts-ignore
-import Handlebars from "handlebars/dist/handlebars.runtime";
+import Handlebars from 'handlebars/dist/handlebars.runtime';
 
-// @ts-ignore
-export function registerComponent(name: string, Component: typeof Components): HelperOptions {
-    // @ts-ignore
-    Handlebars.registerHelper(name, ({data, fn, hash}) => {
-        if (!data.root.children) {
-            data.root.children = {};
-        }
+export interface ComponentInterface<Props extends Record<string, unknown>> {
+  new(props: Props): Components;
 
-        if (!data.root.refs) {
-            data.root.refs = {};
-        }
+  componentName: string;
+}
 
-        const { children } = data.root;
+export function registerComponent(name: string, Component: ComponentInterface<any>) {
+    Handlebars.registerHelper(
+        name,
+        ({data, fn, hash}: HelperOptions) => {
+            if (!data.root.children) {
+                data.root.children = {};
+            }
 
-        const component = new Component(hash);
+            if (!data.root.refs) {
+                data.root.refs = {};
+            }
 
-        if (hash.ref) {
-            data.root.refs[hash.ref] = component;
-        }
+            const {children} = data.root;
 
-        children[component.id] = component;
+            const component = new Component(hash);
 
-        // @ts-ignore
-        const contents = fn ? fn(this) : '';
+            if (hash.ref) {
+                data.root.refs[hash.ref] = component;
+            }
 
-        return `<div data-id="id-${component.id}">${contents}</div>`;
-    });
+            children[component.id] = component;
+
+            const contents = fn ? fn(this) : '';
+
+            return `<div data-id="id-${component.id}">${contents}</div>`;
+        });
 }

@@ -1,9 +1,8 @@
-import template from "./profile.hbs";
-import Components from "../../../utils/Components";
+import template from './profile.hbs';
+import Components from '../../../utils/Components';
 import './profile.scss';
 
-// @ts-ignore
-export class ProfileChangePage extends Components{
+export class ProfileChangePage extends Components {
     constructor() {
         super({
             sendValues: () => {
@@ -14,7 +13,6 @@ export class ProfileChangePage extends Components{
 
                 const data: Record<string, unknown> = {};
 
-                // @ts-ignore
                 Array.from(inputs).forEach((input) => {
                     data[input.name] = input.value;
                 });

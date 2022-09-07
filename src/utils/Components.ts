@@ -1,15 +1,14 @@
-import EventBus from "./EventBus";
-// @ts-ignore
+import EventBus from './EventBus';
+
 import {v4 as makeUUID} from 'uuid';
 
 class Components<T = any> {
-
     public static EVENTS = {
-        INIT: "init",
-        FLOW_CDM: "flow:component-did-mount",
-        FLOW_CDU: "flow:component-did-update",
-        FLOW_RENDER: "flow:render",
-        FLOW_ADD_EVENTS: "flow:add-events",
+        INIT: 'init',
+        FLOW_CDM: 'flow:component-did-mount',
+        FLOW_CDU: 'flow:component-did-update',
+        FLOW_RENDER: 'flow:render',
+        FLOW_ADD_EVENTS: 'flow:add-events',
     };
 
     id = makeUUID();
@@ -21,6 +20,8 @@ class Components<T = any> {
     _eventBus: () => EventBus;
     props: Record<string, any>;
 
+    static componentName: string | undefined;
+
     constructor(propsAndChildren: object = {}) {
         const eventBus = new EventBus();
         const {children, props} = this._getChildren(propsAndChildren);
@@ -28,7 +29,7 @@ class Components<T = any> {
         this.children = children;
 
         this._meta = {
-            props
+            props,
         };
 
         this.props = this._makePropsProxy(props);
@@ -49,15 +50,13 @@ class Components<T = any> {
     }
 
     compile(template: (context: any) => string, context: any) {
-        const html = template({...context, children: this.children, refs: this.refs });
+        const html = template({...context, children: this.children, refs: this.refs});
 
         const tempFragment = document.createElement('template');
 
         tempFragment.innerHTML = html;
 
         Object.entries(this.children).forEach(([_, component]) => {
-
-            // @ts-ignore
             const stub = tempFragment.content.querySelector(`[data-id="id-${component.id}"]`);
 
             if (!stub) {
@@ -66,11 +65,9 @@ class Components<T = any> {
 
             const content = component.getContent()!;
 
-            // @ts-ignore
             stub.replaceWith(content);
 
             if (stub.childNodes.length) {
-                // @ts-ignore
                 content.append(...stub.childNodes);
             }
         });
@@ -79,24 +76,22 @@ class Components<T = any> {
     }
 
     componentDidMount() {
+        return true;
     }
 
     dispatchComponentDidMount() {
         this._eventBus().emit(Components.EVENTS.FLOW_CDM);
     }
 
-    // @ts-ignore
     componentDidUpdate(oldProps, newProps) {
         return JSON.stringify(oldProps) === JSON.stringify(newProps);
     }
 
-    // @ts-ignore
-    setProps = nextProps => {
+    setProps = (nextProps) => {
         if (!nextProps) {
             return;
         }
 
-        // @ts-ignore
         Object.assign(this.props, nextProps);
     };
 
@@ -123,7 +118,6 @@ class Components<T = any> {
         this._addEvents();
     }
 
-    // @ts-ignore
     _registerEvents(eventBus) {
         eventBus.on(Components.EVENTS.INIT, this.init.bind(this));
         eventBus.on(Components.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
@@ -132,17 +126,14 @@ class Components<T = any> {
         eventBus.on(Components.EVENTS.FLOW_ADD_EVENTS, this._addEvents.bind(this));
     }
 
-    // @ts-ignore
     _getChildren(propsAndChildren) {
         const children: Record<string, Components> = {};
         const props: Record<string, any> = {};
 
         Object.entries(propsAndChildren).forEach(([key, value]) => {
             if (value instanceof Components) {
-                // @ts-ignore
                 children[key] = value;
             } else {
-                // @ts-ignore
                 props[key] = value;
             }
         });
@@ -153,48 +144,42 @@ class Components<T = any> {
     _componentDidMount() {
         this.componentDidMount();
 
-        Object.values(this.children).forEach(child => {
-            // @ts-ignore
+        Object.values(this.children).forEach((child) => {
             child.dispatchComponentDidMount();
         });
     }
 
-    // @ts-ignore
-    _componentDidUpdate(oldProps, newProps) {
+    _componentDidUpdate(oldProps: any, newProps: any) {
         if (!this.componentDidUpdate(oldProps, newProps)) {
             this._eventBus().emit(Components.EVENTS.FLOW_RENDER);
         }
     }
 
-    // @ts-ignore
-    _makePropsProxy(props) {
+    _makePropsProxy(props: Record<string, any>) {
         const self = this;
 
         return new Proxy(props, {
-            get(target, p, receiver) {
+            get(target: Record<string, any>, p: string) {
                 const value = target[p];
-                return typeof value === "function" ? value.bind(target) : value;
+                return typeof value === 'function' ? value.bind(target) : value;
             },
-            set(target, p, value, receiver) {
+            set(target: Record<string, any>, p: string, value) {
                 const oldProps = {...target};
                 target[p] = value;
 
                 self._eventBus().emit(Components.EVENTS.FLOW_CDU, oldProps, target);
                 return true;
             },
-            deleteProperty(target, p) {
+            deleteProperty() {
                 throw new Error('нет доступа');
-            }
+            },
         });
     }
 
     _addEvents() {
-        // @ts-ignore
         const {events = {}} = this.props;
 
-        // @ts-ignore
-        Object.keys(events).forEach(eventName => {
-            // @ts-ignore
+        Object.keys(events).forEach((eventName) => {
             this._element?.addEventListener(eventName, events[eventName]);
         });
     }

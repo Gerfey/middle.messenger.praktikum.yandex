@@ -1,13 +1,13 @@
 module.exports = {
+	"root": true,
 	"env": {
 		"browser": true,
 		"es2021": true
 	},
 	"extends": [
+		"yandex",
 		"eslint:recommended",
 		"plugin:@typescript-eslint/recommended"
-	],
-	"overrides": [
 	],
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
@@ -15,24 +15,24 @@ module.exports = {
 		"sourceType": "module"
 	},
 	"plugins": [
-		"@typescript-eslint"
+		"html",
+		"@typescript-eslint",
 	],
 	"rules": {
-		"indent": [
-			"error",
-			"tab"
-		],
-		"linebreak-style": [
-			"error",
-			"windows"
-		],
-		"quotes": [
-			"error",
-			"double"
-		],
-		"semi": [
-			"error",
-			"always"
-		]
-	}
+		"no-useless-escape": "off",
+		"no-shadow": "off",
+		"max-len": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-this-alias": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+	},
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": ['.js', '.ts'],
+        "moduleDirectory": ['node_modules', 'src'],
+      }
+    }
+  }
 };

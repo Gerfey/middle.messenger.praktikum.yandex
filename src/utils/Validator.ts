@@ -1,33 +1,33 @@
 export enum ValidationType {
-    FirstName = 'first_name',
-    SecondName = 'second_name',
-    Login = 'login',
-    Password = 'password',
-    Email = 'email',
-    Phone = 'phone',
-    Message = 'message'
+    FIRST_NAME = 'first_name',
+    SECOND_NAME = 'second_name',
+    LOGIN = 'login',
+    PASSWORD = 'password',
+    EMAIL = 'email',
+    PHONE = 'phone',
+    MESSAGE = 'message'
 }
 
 export class Validator {
     public validate(type: string, value: string): object {
         switch (type) {
-            case ValidationType.Email:
+            case ValidationType.EMAIL:
                 return this.isEmail(value);
-            case ValidationType.Login:
+            case ValidationType.LOGIN:
                 return this.isLogin(value);
-            case ValidationType.FirstName:
-            case ValidationType.SecondName:
+            case ValidationType.FIRST_NAME:
+            case ValidationType.SECOND_NAME:
                 return this.isName(value);
-            case ValidationType.Password:
+            case ValidationType.PASSWORD:
                 return this.isPassword(value);
-            case ValidationType.Phone:
+            case ValidationType.PHONE:
                 return this.isPhone(value);
-            case ValidationType.Message:
+            case ValidationType.MESSAGE:
                 return this.isMessage(value);
             default:
                 return {
                     result: true,
-                    message: ''
+                    message: '',
                 };
         }
     }
@@ -35,66 +35,66 @@ export class Validator {
     private isName(value: string): object {
         const regular = /[A-ZА-Я][a-zа-я\-]*/;
 
-        let result = regular.test(value);
+        const result = regular.test(value);
 
         return {
             result: result,
-            message: 'Допустим набор из букв (латиница + кириллица).'
+            message: 'Допустим набор из букв (латиница + кириллица).',
         };
     }
 
     private isLogin(value: string): object {
         const regular = /(?!^\d+$)[A-Za-z0-9_\-]{3,20}/;
 
-        let result = regular.test(value);
+        const result = regular.test(value);
 
         return {
             result: result,
-            message: 'Допустим набор из букв и цифр (латиница).'
+            message: 'Допустим набор из букв и цифр (латиница).',
         };
     }
 
     private isPassword(value: string): object {
         const regular = /[A-Za-z0-9]{8,40}/;
 
-        let result = regular.test(value);
+        const result = regular.test(value);
 
         return {
             result: result,
-            message: 'Допустимы строчные и прописные латинские буквы, цифры.'
+            message: 'Допустимы строчные и прописные латинские буквы, цифры.',
         };
     }
 
     private isEmail(value: string): object {
         const regular = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-        let result = regular.test(value);
+        const result = regular.test(value);
 
         return {
             result: result,
-            message: 'Строка должна являться валидным email.'
+            message: 'Строка должна являться валидным email.',
         };
     }
 
     private isPhone(value: string): object {
         const regular = /\+?[0-9]{10,15}/;
 
-        let result = regular.test(value);
+        const result = regular.test(value);
 
         return {
             result: result,
-            message: 'Строка должна являться валидным телефоном.'
+            message: 'Строка должна являться валидным телефоном.',
         };
     }
 
     private isMessage(value: string): object {
         const regular = /^\s*$/;
 
-        let result = regular.test(value);
+        const result = regular.test(value);
 
         return {
             result: result,
-            message: 'Строка не должна быть пустой.'
+            message: 'Строка не должна быть пустой.',
         };
     }
 }

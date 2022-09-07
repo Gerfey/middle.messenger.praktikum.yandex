@@ -1,9 +1,8 @@
-import template from "./registration.hbs";
-import Components from "../../utils/Components";
+import template from './registration.hbs';
+import Components from '../../utils/Components';
 import './registration.scss';
-import {Validator} from "../../utils/Validator";
+import {Validator} from '../../utils/Validator';
 
-// @ts-ignore
 export class RegistrationPage extends Components {
     constructor() {
         super({
@@ -20,28 +19,24 @@ export class RegistrationPage extends Components {
                     const validator = new Validator();
 
                     let sendForm = true;
-                    // @ts-ignore
-                    Array.from(formInputs).forEach((formInput) => {
 
-                        let input = formInput?.querySelector('input');
+                    Array.from(formInputs).forEach((formInput) => {
+                        const input = formInput?.querySelector('input');
 
                         if (input) {
                             data[input.name] = input.value;
 
-                            let result = validator.validate(input.name, input.value)
+                            const result = validator.validate(input.name, input.value);
 
-                            let error = formInput?.querySelector('.form-item__div');
-                            // @ts-ignore
+                            const error = formInput?.querySelector('.form-item__div');
+
                             if (result.result === false) {
-
                                 if (error !== undefined) {
-                                    // @ts-ignore
                                     error.textContent = result.message;
                                 }
 
                                 sendForm = false;
-                            }else {
-                                // @ts-ignore
+                            } else {
                                 error.textContent = '';
                             }
                         }
@@ -51,7 +46,7 @@ export class RegistrationPage extends Components {
                         console.log(data);
                     }
                 }
-            }
+            },
         });
     }
 

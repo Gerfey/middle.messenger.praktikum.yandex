@@ -1,61 +1,54 @@
 import './scss/index.scss';
 
-import {AuthorizationPage} from "./pages/Authorization";
-import {RegistrationPage} from "./pages/Registration";
-import {ProfilePage} from "./pages/Profile";
-import {ProfileChangePage} from "./pages/Profile/Change";
-import {Error404Page} from "./pages/Error/404";
-import {Error500Page} from "./pages/Error/500";
-import {ChatPage} from "./pages/Chat";
+import {components} from './components';
 
-import {registerComponent} from "./utils/registerComponent";
+import {AuthorizationPage} from './pages/Authorization';
+import {RegistrationPage} from './pages/Registration';
+import {ProfilePage} from './pages/Profile';
+import {ProfileChangePage} from './pages/Profile/Change';
+import {Error404Page} from './pages/Error/404';
+import {Error500Page} from './pages/Error/500';
+import {ChatPage} from './pages/Chat';
 
-import {ProfileChangePasswordPage} from "./pages/Profile/ChangePassword";
-import {Button} from "./components/Button";
-import {Link} from "./components/Link";
-import {FormItem} from "./components/FormItem";
-import {Input} from "./components/Input";
-import {Error} from "./components/Error";
-import {ProfileItems} from "./components/Profile/Item";
+import {registerComponent} from './utils/registerComponent';
 
-registerComponent('Error', Error as any);
-registerComponent('Button', Button as any);
-registerComponent('Input', Input as any);
-registerComponent('Link', Link as any);
-registerComponent('FormItem', FormItem as any);
-registerComponent('ProfileItems', ProfileItems as any);
+import {ProfileChangePasswordPage} from './pages/Profile/ChangePassword';
+import Components from './utils/Components';
+
+components.forEach((component: Components) => {
+    registerComponent(component.componentName, component);
+});
 
 window.addEventListener('DOMContentLoaded', () => {
-
     const root = document.querySelector('#app');
 
     const path = window.location.pathname;
 
     let homePage;
     switch (path) {
-        case "/":
-        case "/authorization":
+        case '/':
+        case '/authorization':
             homePage = new AuthorizationPage();
             break;
-        case "/profile":
+        case '/profile':
             homePage = new ProfilePage();
             break;
-        case "/profile/change":
+        case '/profile/change':
             homePage = new ProfileChangePage();
             break;
-        case "/profile/change/password":
+        case '/profile/change/password':
             homePage = new ProfileChangePasswordPage();
             break;
-        case "/registration":
+        case '/registration':
             homePage = new RegistrationPage();
             break;
-        case "/chats":
+        case '/chats':
             homePage = new ChatPage();
             break;
-        case "/404":
+        case '/404':
             homePage = new Error404Page();
             break;
-        case "/500":
+        case '/500':
             homePage = new Error500Page();
             break;
         default:
@@ -63,6 +56,5 @@ window.addEventListener('DOMContentLoaded', () => {
             break;
     }
 
-    // @ts-ignore
     root.append(homePage.getContent());
 });
