@@ -13,5 +13,8 @@
       },
       "utilitySelectors": "^\\.util-[a-z]+$"
     }
-  }
+  },
+  "ignoreFiles": [
+    "dist/*"
+  ]
 }
