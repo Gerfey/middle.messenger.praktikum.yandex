@@ -1,9 +1,9 @@
-<div class="profile-change">
-    <div class="profile-change__left">
-        <a href="/profile"><-</a>
+<div class="profile">
+    <div class="sidebar-with-back-btn">
+        <a class="sidebar-with-back-btn__button" href="/profile"><-</a>
     </div>
-    <div class="profile-change__right">
-        <form class="profile">
+    <div class="profile-container">
+        <form class="profile-information">
             <div class="profile-information__image"></div>
             <div class="profile-information__username"> </div>
             <div class="profile-information__items">
@@ -11,7 +11,7 @@
                 {{{ ProfileItems label="Новый пароль" type="password" name="password_new"}}}
                 {{{ ProfileItems label="Повторите новый пароль" type="password" name="password_repeat" }}}
             </div>
-            <div class="profile-change__items">
+            <div class="profile-information__change-items">
                 <div class="edit-item">
                     {{{ Button label="Сохранить" className="edit-item__link button text-white" onClick=sendValues }}}
                 </div>
