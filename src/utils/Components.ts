@@ -2,7 +2,7 @@ import EventBus from './EventBus';
 
 import {nanoid} from 'nanoid';
 
-class Components<T = any> {
+class Components {
     public static EVENTS = {
         INIT: 'init',
         FLOW_CDM: 'flow:component-did-mount',

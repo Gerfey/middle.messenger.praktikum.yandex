@@ -2,18 +2,17 @@ import './scss/index.scss';
 
 import {components} from './components';
 
-import {AuthorizationPage} from './pages/Authorization';
-import {RegistrationPage} from './pages/Registration';
-import {ProfilePage} from './pages/Profile';
-import {ProfileChangePage} from './pages/Profile/Change';
-import {Error404Page} from './pages/Error/404';
-import {Error500Page} from './pages/Error/500';
-import {ChatPage} from './pages/Chat';
-
 import {registerComponent} from './utils/registerComponent';
 
-import {ProfileChangePasswordPage} from './pages/Profile/ChangePassword';
 import Components from './utils/Components';
+import {AuthorizationPage} from './pages/Authorization/authorizationPage';
+import {ChatPage} from './pages/Chat/chatPage';
+import {Error404Page} from './pages/Error/404/error404Page';
+import {Error500Page} from './pages/Error/500/error500Page';
+import {ProfilePage} from './pages/Profile/profilePage';
+import {ProfileChangePasswordPage} from './pages/Profile/ChangePassword/profileChangePasswordPage';
+import {ProfileChangePage} from './pages/Profile/Change/profileChangePage';
+import {RegistrationPage} from './pages/Registration/registrationPage';
 
 components.forEach((component: Components) => {
     registerComponent(component.componentName, component);
