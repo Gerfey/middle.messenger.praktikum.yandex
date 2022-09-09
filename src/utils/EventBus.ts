@@ -1,7 +1,7 @@
 class EventBus {
     private readonly listeners: Record<string, Array<() => void>> = {};
 
-    on(event: string, callback: () => void) {
+    public on(event: string, callback: () => void) {
         if (!this.listeners[event]) {
             this.listeners[event] = [];
         }
@@ -9,7 +9,7 @@ class EventBus {
         this.listeners[event].push(callback);
     }
 
-    off(event: string, callback: () => void) {
+    public off(event: string, callback: () => void) {
         if (!this.listeners[event]) {
             throw new Error(`Нет события: ${event}`);
         }
@@ -19,7 +19,7 @@ class EventBus {
         );
     }
 
-    emit(event: string, ...args: any[]) {
+    public emit(event: string, ...args: any[]) {
         if (!this.listeners[event]) {
             throw new Error(`Нет события: ${event}`);
         }

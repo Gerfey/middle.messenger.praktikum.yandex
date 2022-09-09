@@ -1,5 +1,4 @@
 import EventBus from './EventBus';
-
 import {nanoid} from 'nanoid';
 
 class Components {
@@ -11,14 +10,14 @@ class Components {
         FLOW_ADD_EVENTS: 'flow:add-events',
     };
 
-    id = nanoid(6);
-    children: Record<string, Components>;
-    refs: Record<string, Components> = {};
+    public id = nanoid(6);
+    public children: Record<string, Components>;
+    public refs: Record<string, Components> = {};
+    public props: Record<string, any>;
 
-    _element: HTMLElement | null = null;
-    _meta: { props: any };
-    _eventBus: () => EventBus;
-    props: Record<string, any>;
+    private _element: HTMLElement | null = null;
+    private _meta: { props: any };
+    private _eventBus: () => EventBus;
 
     static componentName: string | undefined;
 
@@ -40,16 +39,7 @@ class Components {
         eventBus.emit(Components.EVENTS.INIT);
     }
 
-    getContent() {
-        return this.element;
-    }
-
-    init() {
-        this._eventBus().emit(Components.EVENTS.FLOW_RENDER);
-        this._eventBus().emit(Components.EVENTS.FLOW_ADD_EVENTS);
-    }
-
-    compile(template: (context: any) => string, context: any) {
+    public compile(template: (context: any) => string, context: any) {
         const html = template({...context, children: this.children, refs: this.refs});
 
         const tempFragment = document.createElement('template');
@@ -75,19 +65,23 @@ class Components {
         return tempFragment.content;
     }
 
-    componentDidMount() {
+    public getContent() {
+        return this.element;
+    }
+
+    protected componentDidMount() {
         return true;
     }
 
-    dispatchComponentDidMount() {
+    protected dispatchComponentDidMount() {
         this._eventBus().emit(Components.EVENTS.FLOW_CDM);
     }
 
-    componentDidUpdate(oldProps, newProps) {
+    protected componentDidUpdate(oldProps, newProps) {
         return JSON.stringify(oldProps) === JSON.stringify(newProps);
     }
 
-    setProps = (nextProps) => {
+    protected setProps = (nextProps) => {
         if (!nextProps) {
             return;
         }
@@ -95,15 +89,16 @@ class Components {
         Object.assign(this.props, nextProps);
     };
 
-    get element() {
-        return this._element;
-    }
-
-    render(): DocumentFragment {
+    protected render(): DocumentFragment {
         return new DocumentFragment();
     }
 
-    _render() {
+    private init() {
+        this._eventBus().emit(Components.EVENTS.FLOW_RENDER);
+        this._eventBus().emit(Components.EVENTS.FLOW_ADD_EVENTS);
+    }
+
+    private _render() {
         const fragment = this.render();
 
         const newElement = fragment.firstElementChild as HTMLElement;
@@ -118,7 +113,11 @@ class Components {
         this._addEvents();
     }
 
-    _registerEvents(eventBus) {
+    private get element() {
+        return this._element;
+    }
+
+    private _registerEvents(eventBus) {
         eventBus.on(Components.EVENTS.INIT, this.init.bind(this));
         eventBus.on(Components.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
         eventBus.on(Components.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
@@ -126,7 +125,7 @@ class Components {
         eventBus.on(Components.EVENTS.FLOW_ADD_EVENTS, this._addEvents.bind(this));
     }
 
-    _getChildren(propsAndChildren) {
+    private _getChildren(propsAndChildren) {
         const children: Record<string, Components> = {};
         const props: Record<string, any> = {};
 
@@ -141,7 +140,7 @@ class Components {
         return {children, props};
     }
 
-    _componentDidMount() {
+    private _componentDidMount() {
         this.componentDidMount();
 
         Object.values(this.children).forEach((child) => {
@@ -149,13 +148,13 @@ class Components {
         });
     }
 
-    _componentDidUpdate(oldProps: any, newProps: any) {
+    private _componentDidUpdate(oldProps: any, newProps: any) {
         if (!this.componentDidUpdate(oldProps, newProps)) {
             this._eventBus().emit(Components.EVENTS.FLOW_RENDER);
         }
     }
 
-    _makePropsProxy(props: Record<string, any>) {
+    private _makePropsProxy(props: Record<string, any>) {
         const self = this;
 
         return new Proxy(props, {
@@ -176,7 +175,7 @@ class Components {
         });
     }
 
-    _addEvents() {
+    private _addEvents() {
         const {events = {}} = this.props;
 
         Object.keys(events).forEach((eventName) => {
@@ -184,7 +183,7 @@ class Components {
         });
     }
 
-    _removeEvents() {
+    private _removeEvents() {
         const events: Record<string, () => void> = (this.props as any).events;
 
         if (!events || !this._element) {
@@ -192,7 +191,7 @@ class Components {
         }
 
         Object.entries(events).forEach(([event, listener]) => {
-            this._element!.removeEventListener(event, listener);
+      this._element!.removeEventListener(event, listener);
         });
     }
 }
