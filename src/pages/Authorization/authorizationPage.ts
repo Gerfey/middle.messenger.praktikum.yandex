@@ -26,12 +26,12 @@ export class AuthorizationPage extends Components {
                         if (input) {
                             data[input.name] = input.value;
 
-                            const result = validator.validate(input.name, input.value);
+                            const resultValidation = validator.validate(input.name, input.value);
 
                             const error = formInput?.querySelector('.form-item__div');
-                            if (result.result === false) {
+                            if (resultValidation.result === false) {
                                 if (error !== undefined) {
-                                    error.textContent = result.message;
+                                    error.textContent = resultValidation.message;
                                 }
 
                                 sendForm = false;

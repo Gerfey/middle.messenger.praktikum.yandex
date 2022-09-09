@@ -1,6 +1,5 @@
 import Components from '../../../utils/Components';
 import template from './profile.hbs';
-import './profile.scss';
 
 export class ProfileChangePasswordPage extends Components {
     constructor() {
