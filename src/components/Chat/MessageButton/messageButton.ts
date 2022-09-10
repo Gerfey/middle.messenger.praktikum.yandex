@@ -2,9 +2,9 @@ import Components from '../../../utils/Components';
 import template from './messageButton.hbs';
 
 interface MessageButtonProps {
-	label: string;
-	className: string;
-	onClick?: () => void;
+  label: string;
+  className: string;
+  onClick?: () => void;
 }
 
 export class MessageButton extends Components<MessageButtonProps> {

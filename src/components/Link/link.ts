@@ -2,8 +2,8 @@ import Components from '../../utils/Components';
 import template from './link.hbs';
 
 interface LinkProps {
-	to: string;
-	className: string;
+  to: string;
+  className: string;
 }
 
 export class Link extends Components<LinkProps> {

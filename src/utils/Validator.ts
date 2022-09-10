@@ -1,11 +1,11 @@
 export enum ValidationType {
-    FIRST_NAME = 'first_name',
-    SECOND_NAME = 'second_name',
-    LOGIN = 'login',
-    PASSWORD = 'password',
-    EMAIL = 'email',
-    PHONE = 'phone',
-    MESSAGE = 'message'
+	FIRST_NAME = 'first_name',
+	SECOND_NAME = 'second_name',
+	LOGIN = 'login',
+	PASSWORD = 'password',
+	EMAIL = 'email',
+	PHONE = 'phone',
+	MESSAGE = 'message'
 }
 
 export class Validator {
@@ -32,6 +32,7 @@ export class Validator {
         }
     }
 
+    // латиница или кириллица, первая буква должна быть заглавной, без пробелов и без цифр, нет спецсимволов (допустим только дефис).
     private isName(value: string): object {
         const regular = /[A-ZА-Я][a-zа-я\-]*/;
 

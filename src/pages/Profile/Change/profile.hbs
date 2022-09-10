@@ -1,24 +1,24 @@
 <div class="profile">
-    <div class="sidebar-with-back-btn">
-        <a class="sidebar-with-back-btn__button" href="/profile"><-</a>
-    </div>
-    <div class="profile-container">
-        <form class="profile-information">
-            <div class="profile-information__image"></div>
-            <div class="profile-information__username"> </div>
-            <div class="profile-information__items">
-                {{{ ProfileItems label="Почта" type="email" name="email" value="pochta@yandex.ru" }}}
-                {{{ ProfileItems label="Логин" type="text" name="login" value="ivanivanov" }}}
-                {{{ ProfileItems label="Имя" type="text" name="first_name" value="Иван" }}}
-                {{{ ProfileItems label="Фамилия" type="text" name="second_name" value="Иванов" }}}
-                {{{ ProfileItems label="Имя в чате" type="text" name="chat_name" value="Иван" }}}
-                {{{ ProfileItems label="Телефон" type="tel" name="phone" value="+7 (909) 967 30 30" }}}
-            </div>
-            <div class="profile-information__change-items">
-                <div class="edit-item">
-                    {{{ Button label="Сохранить" className="edit-item__link button text-white" onClick=sendValues }}}
-                </div>
-            </div>
-        </form>
-    </div>
+  <div class="sidebar-with-back-btn">
+    <a class="sidebar-with-back-btn__button" href="/profile"><-</a>
+  </div>
+  <div class="profile-container">
+    <form class="profile-information">
+      <div class="profile-information__image"></div>
+      <div class="profile-information__username"></div>
+      <div class="profile-information__items">
+        {{{ ProfileItems label="Почта" type="email" name="email" value="pochta@yandex.ru" }}}
+        {{{ ProfileItems label="Логин" type="text" name="login" value="ivanivanov" }}}
+        {{{ ProfileItems label="Имя" type="text" name="first_name" value="Иван" }}}
+        {{{ ProfileItems label="Фамилия" type="text" name="second_name" value="Иванов" }}}
+        {{{ ProfileItems label="Имя в чате" type="text" name="chat_name" value="Иван" }}}
+        {{{ ProfileItems label="Телефон" type="tel" name="phone" value="+7 (909) 967 30 30" }}}
+      </div>
+      <div class="profile-information__change-items">
+        <div class="edit-item">
+          {{{ Button label="Сохранить" className="edit-item__link button text-white" onClick=sendValues }}}
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
