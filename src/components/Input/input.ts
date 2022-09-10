@@ -2,13 +2,13 @@ import Components from '../../utils/Components';
 import template from './input.hbs';
 
 interface InputProps {
-	className: string,
-	name: string;
-	type?: string;
-	placeholder?: string;
-	onFocus?: () => void;
-	onBlur?: () => void;
-	onInput?: () => void;
+    className: string,
+    name: string;
+    type?: string;
+    placeholder?: string;
+    onFocus?: () => void;
+    onBlur?: () => void;
+    onInput?: () => void;
 }
 
 export class Input extends Components<InputProps> {

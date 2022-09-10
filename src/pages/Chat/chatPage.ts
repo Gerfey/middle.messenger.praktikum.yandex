@@ -25,7 +25,7 @@ export class ChatPage extends Components {
 
                         const resultValidation = validator.validate(input.name, input.value);
 
-                        sendForm = !resultValidation.result;
+                        sendForm = resultValidation.result;
                     }
 
                     if (sendForm) {

@@ -3,11 +3,11 @@ import {Validator} from '../../utils/Validator';
 import template from './fromItem.hbs';
 
 interface FormItemProps {
-	className: string,
-	label: string,
-	name: string,
-	type: string,
-	validation: string
+    className: string,
+    label: string,
+    name: string,
+    type: string,
+    validation: string
 }
 
 export class FormItem extends Components<FormItemProps> {

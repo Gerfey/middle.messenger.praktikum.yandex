@@ -20,6 +20,7 @@ module.exports = {
         '@typescript-eslint',
     ],
     'rules': {
+        'no-allowIndentationTabs-escape': 0,
         'no-useless-escape': 'off',
         'no-shadow': 'off',
         'max-len': 'off',

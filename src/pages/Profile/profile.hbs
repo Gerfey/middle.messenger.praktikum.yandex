@@ -1,30 +1,32 @@
 <div class="profile">
-  <div class="sidebar-with-back-btn">
-    <a class="sidebar-with-back-btn__button" href="/chats"><-</a>
-  </div>
-  <div class="profile-container">
-    <div class="profile-information">
-      <div class="profile-information__image"></div>
-      <div class="profile-information__username">Иван</div>
-      <div class="profile-information__items">
-        {{{ ProfileItems label="Почта" type="email" name="email" value="pochta@yandex.ru" readonly="readonly" }}}
-        {{{ ProfileItems label="Логин" type="text" name="login" value="ivanivanov" readonly="readonly" }}}
-        {{{ ProfileItems label="Имя" type="text" name="first_name" value="Иван" readonly="readonly" }}}
-        {{{ ProfileItems label="Фамилия" type="text" name="second_name" value="Иванов" readonly="readonly" }}}
-        {{{ ProfileItems label="Имя в чате" type="text" name="chat_name" value="Иван" readonly="readonly" }}}
-        {{{ ProfileItems label="Телефон" type="tel" name="phone" value="+7 (909) 967 30 30" readonly="readonly" }}}
-      </div>
-      <div class="profile-information__edit-items">
-        <div class="edit-item">
-          <a class="edit-item__link" href="/profile/change">Изменить данные</a>
-        </div>
-        <div class="edit-item">
-          <a class="edit-item__link" href="/profile/change/password">Изменить пароль</a>
-        </div>
-        <div class="edit-item">
-          <a class="edit-item__link text-danger">Выйти</a>
-        </div>
-      </div>
+    <div class="sidebar-with-back-btn">
+        <a class="sidebar-with-back-btn__button" href="/chats"><-</a>
     </div>
-  </div>
+    <div class="profile-container">
+        <div class="profile-information">
+            <div class="profile-information__image"></div>
+            <div class="profile-information__username">Иван</div>
+            <div class="profile-information__items">
+                {{{ ProfileItems label="Почта" type="email" name="email" value="pochta@yandex.ru"
+                                 readonly="readonly" }}}
+                {{{ ProfileItems label="Логин" type="text" name="login" value="ivanivanov" readonly="readonly" }}}
+                {{{ ProfileItems label="Имя" type="text" name="first_name" value="Иван" readonly="readonly" }}}
+                {{{ ProfileItems label="Фамилия" type="text" name="second_name" value="Иванов" readonly="readonly" }}}
+                {{{ ProfileItems label="Имя в чате" type="text" name="chat_name" value="Иван" readonly="readonly" }}}
+                {{{ ProfileItems label="Телефон" type="tel" name="phone" value="+7 (909) 967 30 30"
+                                 readonly="readonly" }}}
+            </div>
+            <div class="profile-information__edit-items">
+                <div class="edit-item">
+                    <a class="edit-item__link" href="/profile/change">Изменить данные</a>
+                </div>
+                <div class="edit-item">
+                    <a class="edit-item__link" href="/profile/change/password">Изменить пароль</a>
+                </div>
+                <div class="edit-item">
+                    <a class="edit-item__link text-danger">Выйти</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
