@@ -28,8 +28,6 @@ export class RegistrationPage extends Components {
 
                             const resultValidation = validator.validate(input.name, input.value);
 
-                            console.log(resultValidation);
-
                             const error = formInput?.querySelector('.form-item__div');
 
                             if (resultValidation.result === false) {

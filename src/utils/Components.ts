@@ -191,7 +191,7 @@ class Components {
         }
 
         Object.entries(events).forEach(([event, listener]) => {
-      this._element!.removeEventListener(event, listener);
+            this._element!.removeEventListener(event, listener);
         });
     }
 }

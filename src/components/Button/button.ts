@@ -2,9 +2,9 @@ import Components from '../../utils/Components';
 import template from './button.hbs';
 
 interface ButtonProps {
-  label: string;
-  className: string;
-  onClick?: () => void;
+    label: string;
+    className: string;
+    onClick?: () => void;
 }
 
 export class Button extends Components<ButtonProps> {

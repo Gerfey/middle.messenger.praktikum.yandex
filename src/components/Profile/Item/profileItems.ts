@@ -2,12 +2,12 @@ import Components from '../../../utils/Components';
 import template from './item.hbs';
 
 interface ProfileItemsProps {
-  className: string,
-  name: string;
-  type?: string;
-  placeholder?: string;
-  onFocus?: () => void;
-  onBlur?: () => void;
+    className: string,
+    name: string;
+    type?: string;
+    placeholder?: string;
+    onFocus?: () => void;
+    onBlur?: () => void;
 }
 
 export class ProfileItems extends Components<ProfileItemsProps> {

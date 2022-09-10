@@ -3,9 +3,9 @@ import {HelperOptions} from 'handlebars';
 import Handlebars from 'handlebars/dist/handlebars.runtime';
 
 export interface ComponentInterface<Props extends Record<string, unknown>> {
-  new(props: Props): Components;
+    new(props: Props): Components;
 
-  componentName: string;
+    componentName: string;
 }
 
 export function registerComponent(name: string, Component: ComponentInterface<any>) {

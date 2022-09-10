@@ -1,15 +1,21 @@
 export enum ValidationType {
-	FIRST_NAME = 'first_name',
-	SECOND_NAME = 'second_name',
-	LOGIN = 'login',
-	PASSWORD = 'password',
-	EMAIL = 'email',
-	PHONE = 'phone',
-	MESSAGE = 'message'
+    FIRST_NAME = 'first_name',
+    SECOND_NAME = 'second_name',
+    LOGIN = 'login',
+    PASSWORD = 'password',
+    EMAIL = 'email',
+    PHONE = 'phone',
+    MESSAGE = 'message'
 }
 
 export class Validator {
     public validate(type: string, value: string): object {
+        const isEmptyString = this.isEmpty(value);
+
+        if (isEmptyString) {
+            return this.isMessage(value);
+        }
+
         switch (type) {
             case ValidationType.EMAIL:
                 return this.isEmail(value);
@@ -32,37 +38,36 @@ export class Validator {
         }
     }
 
-    // латиница или кириллица, первая буква должна быть заглавной, без пробелов и без цифр, нет спецсимволов (допустим только дефис).
     private isName(value: string): object {
-        const regular = /[A-ZА-Я][a-zа-я\-]*/;
+        const regular = /^[A-ZА-ЯЁ][a-zа-яё-]*$/g;
 
         const result = regular.test(value);
 
         return {
             result: result,
-            message: 'Допустим набор из букв (латиница + кириллица).',
+            message: 'Допустим набор из букв (латиница + кириллица)',
         };
     }
 
     private isLogin(value: string): object {
-        const regular = /(?!^\d+$)[A-Za-z0-9_\-]{3,20}/;
+        const regular = /^(?!\d+$)[\da-zA-Z_-]{3,20}$/;
 
         const result = regular.test(value);
 
         return {
             result: result,
-            message: 'Допустим набор из букв и цифр (латиница).',
+            message: 'Допустим набор из букв и цифр (латиница)',
         };
     }
 
     private isPassword(value: string): object {
-        const regular = /[A-Za-z0-9]{8,40}/;
+        const regular = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,40}$/;
 
         const result = regular.test(value);
 
         return {
             result: result,
-            message: 'Допустимы строчные и прописные латинские буквы, цифры.',
+            message: 'Допустимы строчные и прописные латинские буквы, цифры',
         };
     }
 
@@ -73,29 +78,35 @@ export class Validator {
 
         return {
             result: result,
-            message: 'Строка должна являться валидным email.',
+            message: 'Строка должна являться валидным email',
         };
     }
 
     private isPhone(value: string): object {
-        const regular = /\+?[0-9]{10,15}/;
+        const regular = /^((\+7|7|8)+([0-9]){10,15})$/;
 
         const result = regular.test(value);
 
         return {
             result: result,
-            message: 'Строка должна являться валидным телефоном.',
+            message: 'Строка должна являться валидным телефоном',
         };
     }
 
-    private isMessage(value: string): object {
+    isMessage(value: string): object {
+        return {
+            result: this.isNotEmpty(value),
+            message: 'Строка не должна быть пустой',
+        };
+    }
+
+    private isEmpty(value: string): boolean {
         const regular = /^\s*$/;
 
-        const result = regular.test(value);
+        return regular.test(value);
+    }
 
-        return {
-            result: result,
-            message: 'Строка не должна быть пустой.',
-        };
+    private isNotEmpty(value: string): boolean {
+        return !this.isEmpty(value);
     }
 }

@@ -1,14 +1,14 @@
 export enum Method {
-  GET = 'GET',
-  POST = 'POST',
-  PUT = 'PUT',
-  PATCH = 'PATCH',
-  DELETE = 'DELETE'
+    GET = 'GET',
+    POST = 'POST',
+    PUT = 'PUT',
+    PATCH = 'PATCH',
+    DELETE = 'DELETE'
 }
 
 type Options = {
-  method: Method;
-  data?: any;
+    method: Method;
+    data?: any;
 };
 
 export default class HTTPTransport {
