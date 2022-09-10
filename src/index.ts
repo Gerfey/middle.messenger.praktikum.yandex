@@ -44,9 +44,6 @@ window.addEventListener('DOMContentLoaded', () => {
         case '/chats':
             homePage = new ChatPage();
             break;
-        case '/404':
-            homePage = new Error404Page();
-            break;
         case '/500':
             homePage = new Error500Page();
             break;
