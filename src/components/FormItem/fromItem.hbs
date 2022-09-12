@@ -1,0 +1,8 @@
+<div class="{{ className }}">
+    <label class="form-item__label" for="{{ name }}">
+        {{ label }}
+    </label>
+    {{{ Input className="form-item__input" type=type name=name placeholder=label onFocus=onFocus onBlur=onBlur
+              onInput=onInput }}}
+    {{{ Error className="form-item__div" text="Невалидное значение" isValid=true ref="error" }}}
+</div>

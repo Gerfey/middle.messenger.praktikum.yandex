@@ -1,0 +1,21 @@
+<div class="profile">
+    <div class="sidebar-with-back-btn">
+        <a class="sidebar-with-back-btn__button" href="/profile"><-</a>
+    </div>
+    <div class="profile-container">
+        <form class="profile-information">
+            <div class="profile-information__image"></div>
+            <div class="profile-information__username"></div>
+            <div class="profile-information__items">
+                {{{ ProfileItems label="Старый пароль" type="password" name="password" }}}
+                {{{ ProfileItems label="Новый пароль" type="password" name="password_new"}}}
+                {{{ ProfileItems label="Повторите новый пароль" type="password" name="password_repeat" }}}
+            </div>
+            <div class="profile-information__change-items">
+                <div class="edit-item">
+                    {{{ Button label="Сохранить" className="edit-item__link button text-white" onClick=sendValues }}}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

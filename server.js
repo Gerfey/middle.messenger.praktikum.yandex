@@ -1,17 +1,19 @@
 const express = require('express');
+const path = require('path');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-app.use(express.static('./dist/'));
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+app.use('/', express.static(path.join(__dirname, 'dist')));
 
-app.use(function(req, res) {
-    res.send('404: Page not Found', 404);
+const indexPath = path.join(__dirname, 'dist', 'index.html');
+
+app.get('*', (req, res) => {
+    res.sendFile(indexPath);
 });
 
-app.use(function(error, req, res, next) {
-    res.send('500: Internal Server Error', 500);
-});
 
 app.listen(PORT, function () {
     console.log(`Example app listening on port ${PORT}!`);

@@ -1,0 +1,155 @@
+<div class="chat">
+    <div class="chat-column__left">
+        <div class="left-header">
+            <div class="left-header__profile">
+                <a class="profile-link" href="/profile">Профиль ></a>
+            </div>
+            <div class="left-header__search">
+                <div class="icon"></div>
+                <input class="search-input" placeholder="Поиск">
+            </div>
+        </div>
+        <div class="chat-column__left-items">
+            <div class="left-items">
+                <div class="left-items__status">
+                    <div class="status__avatar"></div>
+                </div>
+                <div class="left-items__info">
+                    <div class="info-title">
+                        <h3 class="info-title__name">Андрей</h3>
+                        <div class="info-title__date">
+                            <span class="date-time">10:49</span>
+                        </div>
+                    </div>
+                    <div class="info-subtitle">
+                        <p class="info-subtitle__message">
+                            <span class="message-name">Вы</span>
+                            <span class="message-colon">:</span>
+                            Всем привет!
+                        </p>
+                        <div class="info-subtitle__badge">
+                            <div class="badge">2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="left-items">
+                <div class="left-items__status">
+                    <div class="status__avatar"></div>
+                </div>
+                <div class="left-items__info">
+                    <div class="info-title">
+                        <h3 class="info-title__name">Киноклуб</h3>
+                        <div class="info-title__date">
+                            <span class="date-time">12:00</span>
+                        </div>
+                    </div>
+                    <div class="info-subtitle">
+                        <p class="info-subtitle__message">
+                            Изображение
+                        </p>
+                        <div class="info-subtitle__badge"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="left-items">
+                <div class="left-items__status">
+                    <div class="status__avatar"></div>
+                </div>
+                <div class="left-items__info">
+                    <div class="info-title">
+                        <h3 class="info-title__name">Вадим</h3>
+                        <div class="info-title__date">
+                            <span class="date-time">Пт</span>
+                        </div>
+                    </div>
+                    <div class="info-subtitle">
+                        <p class="info-subtitle__message">
+                            <span class="message-name">Вы</span>
+                            <span class="message-colon">:</span>
+                            Круто!
+                        </p>
+                        <div class="info-subtitle__badge">
+                            <div class="badge">8</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="chat-column__right">
+        <div class="right-items">
+            <div class="right-items__header">
+                <div class="header-item">
+                    <div class="header-item__profile">
+                        <div class="profile__image"></div>
+                        <div class="profile__name">Вадим</div>
+                    </div>
+                    <div class="header-item__submenu">
+                        <div class="submenu__ico"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-items__body">
+                <div class="body__messages">
+                    <div class="messages-group">
+                        <div class="sticky-date">
+                            <span class="sticky-date__text">19 июня</span>
+                        </div>
+                        <div class="messages-group__items">
+
+                            <div class="items-content">
+                                <div class="items-content__outer">
+                                    <div class="main-content">
+                                        <div class="main-content__media"></div>
+                                        <p class="main-content__text">
+                                            Привет! Смотри, тут всплыл интересный кусок лунной космической истории —
+                                            НАСА в какой-то момент
+                                            попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы
+                                            все знаем что
+                                            астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер
+                                            все еще находятся на
+                                            поверхности Луны, так как астронавты с собой забрали только кассеты с
+                                            пленкой.
+                                            <br><br>
+                                            Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на
+                                            ракету они так
+                                            никогда и не попали. Всего их было произведено 25 штук, одну из них недавно
+                                            продали на аукционе за
+                                            45000 евро.
+                                            <span class="text-meta">11:56</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="items-content">
+                                <div class="items-content__main">
+                                    <div class="main-content">
+                                        <div class="main-content__media"></div>
+                                        <p class="main-content__text">
+                                            Круто!
+                                            <span class="text-meta">12:00</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-items__footer">
+                <div class="footer-item__pin">
+                    <button class="pin-ico" type="button"></button>
+                </div>
+                <form class="footer-item__message">
+                    <div class="message-block">
+                        <input name="message" class="message-block__input" placeholder="Сообщение"/>
+                    </div>
+                    {{{ MessageButton label="" className="message__button" onClick=sendValues }}}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
