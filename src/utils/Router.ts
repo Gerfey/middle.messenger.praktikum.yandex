@@ -68,6 +68,10 @@ class Router {
 
 export default Router;
 
+export interface WithRouterProps {
+    router: Router
+}
+
 export function withRouter(Component: typeof Components) {
     return class WithRouter extends Component {
         public static componentName = Component.name;

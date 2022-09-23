@@ -1,15 +1,16 @@
-import Components from '../../utils/Components';
 import template from './link.hbs';
+import {WithRouterProps} from '../../utils/Router';
+import Components from '../../utils/Components';
 
-interface LinkProps {
+interface LinkProps extends WithRouterProps {
     to: string;
     className: string;
 }
 
-export class Link extends Components<LinkProps> {
+export class Link extends Components {
     static componentName = 'Link';
 
-    constructor({to, className}: LinkProps) {
+    constructor({to, className, router}: LinkProps) {
         super({
             to,
             className,
@@ -17,7 +18,7 @@ export class Link extends Components<LinkProps> {
                 click: (e: MouseEvent) => {
                     e.preventDefault();
 
-                    window.open(to, '_self');
+                    router.go(to);
                 },
             },
         });
