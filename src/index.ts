@@ -13,44 +13,25 @@ import {ProfilePage} from './pages/Profile/profilePage';
 import {ProfileChangePasswordPage} from './pages/Profile/ChangePassword/profileChangePasswordPage';
 import {ProfileChangePage} from './pages/Profile/Change/profileChangePage';
 import {RegistrationPage} from './pages/Registration/registrationPage';
-
-components.forEach((component: Components) => {
-    registerComponent(component.componentName, component);
-});
+import Router from './utils/Router';
 
 window.addEventListener('DOMContentLoaded', () => {
-    const root = document.querySelector('#app');
+    components.forEach((component: Components) => {
+        registerComponent(component.componentName, component);
+    });
 
-    const path = window.location.pathname;
+    const router = new Router();
 
-    let homePage;
-    switch (path) {
-        case '/':
-        case '/authorization':
-            homePage = new AuthorizationPage();
-            break;
-        case '/profile':
-            homePage = new ProfilePage();
-            break;
-        case '/profile/change':
-            homePage = new ProfileChangePage();
-            break;
-        case '/profile/change/password':
-            homePage = new ProfileChangePasswordPage();
-            break;
-        case '/registration':
-            homePage = new RegistrationPage();
-            break;
-        case '/chats':
-            homePage = new ChatPage();
-            break;
-        case '/500':
-            homePage = new Error500Page();
-            break;
-        default:
-            homePage = new Error404Page();
-            break;
-    }
+    router
+        .use('/', AuthorizationPage)
+        .use('/authorization', AuthorizationPage)
+        .use('/registration', RegistrationPage)
+        .use('/chats', ChatPage)
+        .use('/profile', ProfilePage)
+        .use('/profile/change', ProfileChangePage)
+        .use('/profile/change/password', ProfileChangePasswordPage)
+        .use('/500', Error500Page)
+        .use('/404', Error404Page);
 
-    root.append(homePage.getContent());
+    router.start();
 });
