@@ -24,12 +24,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
     router
         .use('/', AuthorizationPage)
-        .use('/authorization', AuthorizationPage)
-        .use('/registration', RegistrationPage)
-        .use('/chats', ChatPage)
-        .use('/profile', ProfilePage)
-        .use('/profile/change', ProfileChangePage)
-        .use('/profile/change/password', ProfileChangePasswordPage)
+        .use('/sign-up', RegistrationPage)
+        .use('/messenger', ChatPage)
+        .use('/settings', ProfilePage)
+        .use('/settings/change', ProfileChangePage)
+        .use('/settings/change/password', ProfileChangePasswordPage)
         .use('/500', Error500Page)
         .use('/404', Error404Page);
 
