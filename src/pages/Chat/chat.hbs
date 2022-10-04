@@ -2,79 +2,18 @@
     <div class="chat-column__left">
         <div class="left-header">
             <div class="left-header__profile">
-                <a class="profile-link" href="/profile">Профиль ></a>
+                {{# Link to="/settings" className="profile-link" }}Профиль >{{/Link}}
             </div>
             <div class="left-header__search">
                 <div class="icon"></div>
                 <input class="search-input" placeholder="Поиск">
             </div>
         </div>
-        <div class="chat-column__left-items">
-            <div class="left-items">
-                <div class="left-items__status">
-                    <div class="status__avatar"></div>
-                </div>
-                <div class="left-items__info">
-                    <div class="info-title">
-                        <h3 class="info-title__name">Андрей</h3>
-                        <div class="info-title__date">
-                            <span class="date-time">10:49</span>
-                        </div>
-                    </div>
-                    <div class="info-subtitle">
-                        <p class="info-subtitle__message">
-                            <span class="message-name">Вы</span>
-                            <span class="message-colon">:</span>
-                            Всем привет!
-                        </p>
-                        <div class="info-subtitle__badge">
-                            <div class="badge">2</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="left-items">
-                <div class="left-items__status">
-                    <div class="status__avatar"></div>
-                </div>
-                <div class="left-items__info">
-                    <div class="info-title">
-                        <h3 class="info-title__name">Киноклуб</h3>
-                        <div class="info-title__date">
-                            <span class="date-time">12:00</span>
-                        </div>
-                    </div>
-                    <div class="info-subtitle">
-                        <p class="info-subtitle__message">
-                            Изображение
-                        </p>
-                        <div class="info-subtitle__badge"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="left-items">
-                <div class="left-items__status">
-                    <div class="status__avatar"></div>
-                </div>
-                <div class="left-items__info">
-                    <div class="info-title">
-                        <h3 class="info-title__name">Вадим</h3>
-                        <div class="info-title__date">
-                            <span class="date-time">Пт</span>
-                        </div>
-                    </div>
-                    <div class="info-subtitle">
-                        <p class="info-subtitle__message">
-                            <span class="message-name">Вы</span>
-                            <span class="message-colon">:</span>
-                            Круто!
-                        </p>
-                        <div class="info-subtitle__badge">
-                            <div class="badge">8</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+        {{{ ChatList chatsList=chats userInfo=user }}}
+
+        <div class="create-chat">
+            {{{ Button label="+" className="create-chat__button" onClick=clickCreateChat }}}
         </div>
     </div>
     <div class="chat-column__right">
@@ -86,7 +25,7 @@
                         <div class="profile__name">Вадим</div>
                     </div>
                     <div class="header-item__submenu">
-                        <div class="submenu__ico"></div>
+                        {{{ ChatUsersDropdown }}}
                     </div>
                 </div>
             </div>
@@ -147,9 +86,29 @@
                     <div class="message-block">
                         <input name="message" class="message-block__input" placeholder="Сообщение"/>
                     </div>
-                    {{{ MessageButton label="" className="message__button" onClick=sendValues }}}
+                    {{{ MessageButton label="" className="message__button" onClick=sendMessage }}}
                 </form>
             </div>
         </div>
     </div>
+
+    <div class="modal" data-modal="chats_user_create">
+        <p class="modal__title">Добавить пользователя</p>
+        {{{ FormItem className="form-item chats_user_create" label="Логин" name="login" type="text" validation="login" }}}
+        {{{ Button label="Добавить" className="button text-white" onClick=sendCreateUser }}}
+    </div>
+
+    <div class="modal" data-modal="chats_user_remove">
+        <p class="modal__title">Удалить пользователя</p>
+        {{{ FormItem className="form-item chats_user_remove" label="Логин" name="login" type="text" validation="login" }}}
+        {{{ Button label="Удалить" className="button text-white" onClick=sendDeleteUser }}}
+    </div>
+
+    <div class="modal" data-modal="chats_create">
+        <p class="modal__title">Создать чат</p>
+        {{{ FormItem className="form-item chats_create" label="Наименование" name="title" type="text" validation="title" }}}
+        {{{ Button label="Создать" className="button text-white" onClick=sendCreateChat }}}
+    </div>
+
+    <div class="overlay" id="overlay-modal"></div>
 </div>
