@@ -1,4 +1,4 @@
-class EventBus {
+export class EventBus {
     private readonly listeners: Record<string, Array<() => void>> = {};
 
     public on(event: string, callback: () => void) {
@@ -21,7 +21,7 @@ class EventBus {
 
     public emit(event: string, ...args: any[]) {
         if (!this.listeners[event]) {
-            throw new Error(`Нет события: ${event}`);
+            return;
         }
 
         this.listeners[event].forEach(function (listener) {
@@ -29,5 +29,3 @@ class EventBus {
         });
     }
 }
-
-export default EventBus;

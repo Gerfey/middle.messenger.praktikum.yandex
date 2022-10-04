@@ -13,14 +13,13 @@ import {ProfilePage} from './pages/Profile/profilePage';
 import {ProfileChangePasswordPage} from './pages/Profile/ChangePassword/profileChangePasswordPage';
 import {ProfileChangePage} from './pages/Profile/Change/profileChangePage';
 import {RegistrationPage} from './pages/Registration/registrationPage';
-import Router from './utils/Router';
+import router from './utils/Router';
+import AuthController from './controllers/AuthController';
 
 window.addEventListener('DOMContentLoaded', () => {
     components.forEach((component: Components) => {
         registerComponent(component.componentName, component);
     });
-
-    const router = new Router();
 
     router
         .use('/', AuthorizationPage)
@@ -32,5 +31,28 @@ window.addEventListener('DOMContentLoaded', () => {
         .use('/500', Error500Page)
         .use('/404', Error404Page);
 
-    router.start();
+    let isProtectedRoute = true;
+
+    switch (window.location.pathname) {
+        case '/':
+        case '/sign-up':
+            isProtectedRoute = false;
+            break;
+    }
+
+    try {
+        AuthController.fetchUser();
+
+        router.start();
+
+        if (!isProtectedRoute) {
+            router.go('/messenger');
+        }
+    } catch (e) {
+        router.start();
+
+        if (isProtectedRoute) {
+            router.go('/');
+        }
+    }
 });

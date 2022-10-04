@@ -4,19 +4,23 @@
     </div>
     <div class="profile-container">
         <form class="profile-information">
-            <div class="profile-information__image"></div>
+            <div class="profile-information__image">
+                {{#if avatar }}
+                    <img class="image-file" src="https://ya-praktikum.tech/api/v2/resources/{{avatar}}" alt="Аватар">
+                {{/if }}
+            </div>
             <div class="profile-information__username"></div>
             <div class="profile-information__items">
-                {{{ ProfileItems label="Почта" type="email" name="email" value="pochta@yandex.ru" }}}
-                {{{ ProfileItems label="Логин" type="text" name="login" value="ivanivanov" }}}
-                {{{ ProfileItems label="Имя" type="text" name="first_name" value="Иван" }}}
-                {{{ ProfileItems label="Фамилия" type="text" name="second_name" value="Иванов" }}}
-                {{{ ProfileItems label="Имя в чате" type="text" name="chat_name" value="Иван" }}}
-                {{{ ProfileItems label="Телефон" type="tel" name="phone" value="+7 (909) 967 30 30" }}}
+                {{{ ProfileItems label="Почта" type="email" name="email" value=email }}}
+                {{{ ProfileItems label="Логин" type="text" name="login" value=login }}}
+                {{{ ProfileItems label="Имя" type="text" name="first_name" value=first_name }}}
+                {{{ ProfileItems label="Фамилия" type="text" name="second_name" value=second_name }}}
+                {{{ ProfileItems label="Имя в чате" type="text" name="display_name" value=display_name }}}
+                {{{ ProfileItems label="Телефон" type="tel" name="phone" value=phone }}}
             </div>
             <div class="profile-information__change-items">
                 <div class="edit-item">
-                    {{{ Button label="Сохранить" className="edit-item__link button text-white" onClick=sendValues }}}
+                    {{{ Button label="Сохранить" className="edit-item__link button text-white" onClick=onSubmit }}}
                 </div>
             </div>
         </form>

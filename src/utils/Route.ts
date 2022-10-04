@@ -32,10 +32,10 @@ export default class Route {
 
     render() {
         if (!this.block) {
-            this.block = new this.blockClass();
+            this.block = new this.blockClass({});
         }
 
-        const root = document.querySelector(this.props.rootQuery);
+        const root = document.querySelector(this.props, this.block);
 
         if (!root) {
             throw new Error('Root not found');

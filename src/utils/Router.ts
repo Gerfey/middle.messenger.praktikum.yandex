@@ -7,16 +7,18 @@ class Router {
     private history = window.history;
     private currentRoute: Route | null = null;
 
-    constructor() {
+    constructor(private readonly rootQuery: string) {
         if (Router.__instance) {
             return Router.__instance;
         }
+
+        this.routes = [];
 
         Router.__instance = this;
     }
 
     public use(pathname: string, block: typeof Components) {
-        const route = new Route(pathname, block, {rootQuery: '#app'});
+        const route = new Route(pathname, block, this.rootQuery);
 
         this.routes.push(route);
 
@@ -24,8 +26,10 @@ class Router {
     }
 
     public start() {
-        window.onpopstate = () => {
-            this._onRoute(window.location.pathname);
+        window.onpopstate = (event: PopStateEvent) => {
+            const target = event.currentTarget as Window;
+
+            this._onRoute(target.location.pathname);
         };
 
         this._onRoute(window.location.pathname);
@@ -51,7 +55,7 @@ class Router {
             return;
         }
 
-        if (this.currentRoute) {
+        if (this.currentRoute && this.currentRoute !== route) {
             this.currentRoute.leave();
         }
 
@@ -66,7 +70,7 @@ class Router {
     }
 }
 
-export default Router;
+export default new Router('#app');
 
 export interface WithRouterProps {
     router: Router
@@ -77,7 +81,7 @@ export function withRouter(Component: typeof Components) {
         public static componentName = Component.name;
 
         constructor(props: any) {
-            super({...props, router: new Router()});
+            super({...props, router: new Router('#app')});
         }
     };
 }

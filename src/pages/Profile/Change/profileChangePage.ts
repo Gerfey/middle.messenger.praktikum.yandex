@@ -1,27 +1,35 @@
 import Components from '../../../utils/Components';
 import template from './profile.hbs';
+import {withStore} from '../../../utils/Store';
+import ProfileController from '../../../controllers/ProfileController';
+import ProfileItems from '../../../components/Profile/Item';
+import AuthController from '../../../controllers/AuthController';
 
-export class ProfileChangePage extends Components {
+export class ProfileChangePageBase extends Components {
     constructor() {
         super({
-            sendValues: () => {
-                const element = this.getContent();
+            onSubmit: () => {
+                const values = Object
+                    .values(this.children)
+                    .filter(child => child instanceof ProfileItems)
+                    .map((child) => ([(child as ProfileItems).getName(), (child as ProfileItems).getValue()]));
 
-                const form = element?.querySelector('form');
-                const inputs = form?.querySelectorAll('input');
+                const data = Object.fromEntries(values);
 
-                const data: Record<string, unknown> = {};
-
-                Array.from(inputs).forEach((input) => {
-                    data[input.name] = input.value;
-                });
-
-                console.log(data);
+                ProfileController.changeUserData(data);
             },
         });
+    }
+
+    init() {
+        AuthController.fetchUser();
     }
 
     protected render(): DocumentFragment {
         return this.compile(template, this.props);
     }
 }
+
+const withUser = withStore((state) => ({...state.user}));
+
+export const ProfileChangePage = withUser(ProfileChangePageBase);

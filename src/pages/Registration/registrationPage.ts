@@ -1,14 +1,21 @@
 import Components from '../../utils/Components';
 import template from './registration.hbs';
 import './registration.scss';
-import sendDataForm from '../../utils/sendDataForm';
+import FormItem from '../../components/FormItem';
+import AuthController from '../../controllers/AuthController';
 
 export class RegistrationPage extends Components {
     constructor() {
         super({
-            sendValues: () => {
-                const element = this.getContent();
-                sendDataForm(element);
+            onSubmit: () => {
+                const values = Object
+                    .values(this.children)
+                    .filter(child => child instanceof FormItem)
+                    .map((child) => ([(child as FormItem).getName(), (child as FormItem).getValue()]));
+
+                const data = Object.fromEntries(values);
+
+                AuthController.signup(data);
             },
         });
     }

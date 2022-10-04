@@ -34,45 +34,6 @@
         flex-direction: column;
       }
 
-      .form-item {
-        display: flex;
-        flex-direction: column;
-        padding-top: 16px;
-
-        &__label {
-          display: none;
-          color: #999;
-          font-size: 9px;
-          line-height: 9px;
-        }
-
-        &__input {
-          width: 100%;
-          padding: 7px 0;
-          border-bottom: 1px solid #3369f3;
-
-          &::placeholder {
-            color: #999;
-          }
-
-          &:hover {
-            cursor: pointer;
-          }
-        }
-
-        &__div {
-          color: #ff2f2f;
-          padding: 7px 0;
-          font-weight: 400;
-          font-size: 8px;
-          line-height: 8px;
-        }
-
-        &:last-child {
-          padding-bottom: 150px;
-        }
-      }
-
       &__buttons {
         display: flex;
         flex-direction: column;

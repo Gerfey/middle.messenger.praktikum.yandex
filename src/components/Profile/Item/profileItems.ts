@@ -23,6 +23,14 @@ export class ProfileItems extends Components<ProfileItemsProps> {
         });
     }
 
+    public getName() {
+        return (this.element.querySelector('input') as HTMLInputElement).name;
+    }
+
+    public getValue() {
+        return (this.element.querySelector('input') as HTMLInputElement).value;
+    }
+
     protected render() {
         return this.compile(template, this.props);
     }
