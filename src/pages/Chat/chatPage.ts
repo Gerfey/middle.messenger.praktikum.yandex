@@ -36,9 +36,7 @@ export default class ChatPageBase extends Components {
 
                 const data = Object.fromEntries(values);
 
-                console.log(data);
-
-                ChatsController.addUserInChat(data);
+                ChatsController.addUserInChat(data, this.props.selectedChatId);
             },
             sendDeleteUser: () => {
                 console.log('delete user');
