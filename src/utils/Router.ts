@@ -78,7 +78,7 @@ export interface WithRouterProps {
 
 export function withRouter(Component: typeof Components) {
     return class WithRouter extends Component {
-        public static componentName = Component.name;
+        public static componentName = Component.componentName;
 
         constructor(props: any) {
             super({...props, router: new Router('#app')});
