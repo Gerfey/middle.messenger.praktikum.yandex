@@ -4,17 +4,10 @@ import './chat.scss';
 import {withStore} from '../../utils/Store';
 import ChatsController from '../../controllers/ChatsController';
 import FormItem from '../../components/FormItem';
-import MessagesController from '../../controllers/MessagesController';
 
 export default class ChatPageBase extends Components {
     constructor() {
         super({
-            sendMessage: () => {
-                const input = document.querySelector('.message-block__input');
-                const message = input.value;
-
-                MessagesController.sendMessage(1294, message);
-            },
             clickCreateChat: (e: PointerEvent) => {
                 e.preventDefault();
                 console.log('chat-create');

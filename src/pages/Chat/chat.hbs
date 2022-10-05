@@ -10,103 +10,34 @@
             </div>
         </div>
 
-        {{{ ChatList chatsList=chats userInfo=user }}}
+        {{{ ChatList chatList=chats userInfo=user }}}
 
         <div class="create-chat">
             {{{ Button label="+" className="create-chat__button" onClick=clickCreateChat }}}
         </div>
     </div>
     <div class="chat-column__right">
-        <div class="right-items">
-            <div class="right-items__header">
-                <div class="header-item">
-                    <div class="header-item__profile">
-                        <div class="profile__image"></div>
-                        <div class="profile__name">Вадим</div>
-                    </div>
-                    <div class="header-item__submenu">
-                        {{{ ChatUsersDropdown }}}
-                    </div>
-                </div>
-            </div>
-            <div class="right-items__body">
-                <div class="body__messages">
-                    <div class="messages-group">
-                        <div class="sticky-date">
-                            <span class="sticky-date__text">19 июня</span>
-                        </div>
-                        <div class="messages-group__items">
-
-                            <div class="items-content">
-                                <div class="items-content__outer">
-                                    <div class="main-content">
-                                        <div class="main-content__media"></div>
-                                        <p class="main-content__text">
-                                            Привет! Смотри, тут всплыл интересный кусок лунной космической истории —
-                                            НАСА в какой-то момент
-                                            попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы
-                                            все знаем что
-                                            астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер
-                                            все еще находятся на
-                                            поверхности Луны, так как астронавты с собой забрали только кассеты с
-                                            пленкой.
-                                            <br><br>
-                                            Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на
-                                            ракету они так
-                                            никогда и не попали. Всего их было произведено 25 штук, одну из них недавно
-                                            продали на аукционе за
-                                            45000 евро.
-                                            <span class="text-meta">11:56</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="items-content">
-                                <div class="items-content__main">
-                                    <div class="main-content">
-                                        <div class="main-content__media"></div>
-                                        <p class="main-content__text">
-                                            Круто!
-                                            <span class="text-meta">12:00</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="right-items__footer">
-                <div class="footer-item__pin">
-                    <button class="pin-ico" type="button"></button>
-                </div>
-                <form class="footer-item__message">
-                    <div class="message-block">
-                        <input name="message" class="message-block__input" placeholder="Сообщение"/>
-                    </div>
-                    {{{ MessageButton label="" className="message__button" onClick=sendMessage }}}
-                </form>
-            </div>
-        </div>
+        {{{ ChatMessages chatId=selectedChatId  }}}
     </div>
 
     <div class="modal" data-modal="chats_user_create">
         <p class="modal__title">Добавить пользователя</p>
-        {{{ FormItem className="form-item chats_user_create" label="Логин" name="login" type="text" validation="login" }}}
+        {{{ FormItem className="form-item chats_user_create" label="Логин" name="login" type="text"
+                     validation="login" }}}
         {{{ Button label="Добавить" className="button text-white" onClick=sendCreateUser }}}
     </div>
 
     <div class="modal" data-modal="chats_user_remove">
         <p class="modal__title">Удалить пользователя</p>
-        {{{ FormItem className="form-item chats_user_remove" label="Логин" name="login" type="text" validation="login" }}}
+        {{{ FormItem className="form-item chats_user_remove" label="Логин" name="login" type="text"
+                     validation="login" }}}
         {{{ Button label="Удалить" className="button text-white" onClick=sendDeleteUser }}}
     </div>
 
     <div class="modal" data-modal="chats_create">
         <p class="modal__title">Создать чат</p>
-        {{{ FormItem className="form-item chats_create" label="Наименование" name="title" type="text" validation="title" }}}
+        {{{ FormItem className="form-item chats_create" label="Наименование" name="title" type="text"
+                     validation="title" }}}
         {{{ Button label="Создать" className="button text-white" onClick=sendCreateChat }}}
     </div>
 

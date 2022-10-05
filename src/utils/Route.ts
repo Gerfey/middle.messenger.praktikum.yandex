@@ -35,7 +35,7 @@ export default class Route {
             this.block = new this.blockClass({});
         }
 
-        const root = document.querySelector(this.props, this.block);
+        const root = document.querySelector(this.props);
 
         if (!root) {
             throw new Error('Root not found');
