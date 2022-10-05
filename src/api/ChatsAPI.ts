@@ -1,5 +1,4 @@
 import BaseAPI from './BaseAPI';
-import {User} from "./AuthAPI";
 
 export interface ChatInfo {
     id: number;
@@ -65,6 +64,12 @@ export class ChatsAPI extends BaseAPI {
             withCredentials: true,
             data: data,
         });
+    }
+
+    async getToken(id: number): Promise<string> {
+        const response = await this.http.post<{ token: string }>(`/token/${id}`);
+
+        return response.token;
     }
 
     update = undefined;

@@ -2,15 +2,15 @@ import Components from '../../../utils/Components';
 import template from './chatList.hbs';
 
 interface ChatListProps {
-    chatsList: any;
+    chatList: any;
     userInfo: any;
 }
 
-export class ChatList extends Components<ChatsProps> {
+export class ChatList extends Components<ChatListProps> {
     static componentName = 'ChatList';
 
-    constructor({chatsList, userInfo}: ChatListProps) {
-        super({chatsList, userInfo});
+    constructor({chatList, userInfo}: ChatListProps) {
+        super({chatList, userInfo});
     }
 
     protected render() {

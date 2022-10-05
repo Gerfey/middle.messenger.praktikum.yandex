@@ -33,7 +33,7 @@ export class AuthAPI extends BaseAPI {
     signin(data: SignInData) {
         return this.http.post('/signin', {
             withCredentials: true,
-            data: data,
+            data,
         });
     }
 
@@ -41,7 +41,7 @@ export class AuthAPI extends BaseAPI {
     signup(data: SignUpData) {
         return this.http.post('/signup', {
             withCredentials: true,
-            data: data,
+            data,
         });
     }
 
