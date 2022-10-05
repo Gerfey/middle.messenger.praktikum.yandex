@@ -1,6 +1,7 @@
 import API, {ChatsAPI, CreateChat} from '../api/ChatsAPI';
 import store from '../utils/Store';
 import MessagesController from './MessagesController';
+import ProfileController from "./ProfileController";
 
 export class ChatsController {
     private readonly api: ChatsAPI;
@@ -13,8 +14,15 @@ export class ChatsController {
         await this.api.create(data);
     }
 
-    async addUserInChat(data) {
-        await this.api.addUser(data);
+    async addUserInChat(data, selectedChatId) {
+        const findUser = await ProfileController.findUsers(data);
+
+        await this.api.addUser({
+            users: [
+                findUser[0]?.id
+            ],
+            chatId: selectedChatId
+        });
     }
 
     async removeUserInChat(data) {

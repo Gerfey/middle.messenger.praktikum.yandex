@@ -52,7 +52,7 @@ export class ProfileController {
     }
 
     async findUsers(data: FindUsers) {
-        return await this.api.findUsers(data);
+        return this.api.findUsers(data);
     }
 }
 
