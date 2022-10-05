@@ -34,9 +34,20 @@ export class AuthController {
     }
 
     async fetchUser() {
-        const user = await this.api.read();
+        try {
+            const user = await this.api.read();
 
-        store.set('user', user);
+            store.set('user', user);
+
+            switch (window.location.pathname) {
+                case '/':
+                case '/sign-up':
+                    router.go('/messenger');
+                    break;
+            }
+        } catch (e: any) {
+            router.go('/');
+        }
     }
 
     async logout() {
