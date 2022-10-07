@@ -1,0 +1,50 @@
+<div class="right-items">
+    {{# if messages }}
+        <div class="right-items__header">
+            <div class="header-item">
+                <div class="header-item__profile">
+                    <div class="profile__image"></div>
+                    <div class="profile__name">Заголовок</div>
+                </div>
+                <div class="header-item__submenu">
+                    {{{ ChatUsersDropdown }}}
+                </div>
+            </div>
+        </div>
+        <div class="right-items__body">
+            <div class="body__messages">
+                <div class="messages-group">
+                    <div class="sticky-date">
+                        <span class="sticky-date__text">19 июня</span>
+                    </div>
+                    <div class="messages-group__items">
+                        {{#foreach messages }}
+                            <div class="items-content">
+                                <div class="items-content__outer">
+                                    <div class="main-content">
+                                        <div class="main-content__media"></div>
+                                        <p class="main-content__text">
+                                            {{ this.content }}
+                                            <time class="text-meta">{{ formatTime this.time  "HH:mm"  }}</time>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        {{/foreach}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right-items__footer">
+            <div class="footer-item__pin">
+                <button class="pin-ico" type="button"></button>
+            </div>
+            <form class="footer-item__message">
+                <div class="message-block">
+                    <input name="message" class="message-block__input" placeholder="Сообщение"/>
+                </div>
+                {{{ MessageButton label="" className="message__button" onClick=sendMessage }}}
+            </form>
+        </div>
+    {{/if}}
+</div>

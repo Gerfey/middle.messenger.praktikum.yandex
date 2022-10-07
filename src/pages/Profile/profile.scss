@@ -43,9 +43,18 @@
       width: 130px;
       height: 130px;
       border-radius: 50%;
+      overflow: hidden;
       background-image: url("../../../static/img/profile/Union.svg");
       background-repeat: no-repeat;
       background-position: center;
+
+      .image-file {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
     }
 
     &__username {

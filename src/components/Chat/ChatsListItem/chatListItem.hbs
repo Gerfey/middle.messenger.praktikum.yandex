@@ -1,0 +1,33 @@
+<div class="left-items">
+    <div class="left-items__status">
+        <div class="status__avatar"></div>
+    </div>
+    <div class="left-items__info">
+        <div class="info-title">
+            <h3 class="info-title__name">{{chatItem.title}}</h3>
+            <div class="info-title__date">
+                {{#if chatItem.last_message.time }}
+                    <time class="date-time" datetime="{{ chatItem.last_message.time }}">
+                        {{formatTime chatItem.last_message.time  "HH:mm" }}
+                    </time>
+                {{/if }}
+            </div>
+        </div>
+        <div class="info-subtitle">
+            <p class="info-subtitle__message">
+                {{#if chatItem.last_message }}
+                    {{#compare chatItem.last_message.user.login '===' user.login }}
+                        <span class="message-name">Вы</span>
+                        <span class="message-colon">:</span>
+                    {{/compare }}
+                    {{ chatItem.last_message.content }}
+                {{/if }}
+            </p>
+            <div class="info-subtitle__badge">
+                {{# if chatItem.unread_count }}
+                    <div class="badge">{{chatItem.unread_count}}</div>
+                {{/if }}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-import EventBus from './EventBus';
+import {EventBus} from './EventBus';
 import {nanoid} from 'nanoid';
 
 class Components {
@@ -15,7 +15,7 @@ class Components {
     public refs: Record<string, Components> = {};
     public props: Record<string, any>;
 
-    private _element: HTMLElement | null = null;
+    public element: HTMLElement | null = null;
     private _meta: { props: any };
     private _eventBus: () => EventBus;
 
@@ -81,7 +81,7 @@ class Components {
         return JSON.stringify(oldProps) === JSON.stringify(newProps);
     }
 
-    protected setProps = (nextProps) => {
+    public setProps = (nextProps) => {
         if (!nextProps) {
             return;
         }
@@ -93,32 +93,36 @@ class Components {
         return new DocumentFragment();
     }
 
-    private init() {
+    private _init() {
+        this.init();
+
         this._eventBus().emit(Components.EVENTS.FLOW_RENDER);
         this._eventBus().emit(Components.EVENTS.FLOW_ADD_EVENTS);
     }
+
+    public init(): void {}
 
     private _render() {
         const fragment = this.render();
 
         const newElement = fragment.firstElementChild as HTMLElement;
 
-        if (this._element) {
+        if (this.element) {
             this._removeEvents();
-            this._element.replaceWith(newElement);
+            this.element.replaceWith(newElement);
         }
 
-        this._element = newElement;
+        this.element = newElement;
 
         this._addEvents();
     }
 
     private get element() {
-        return this._element;
+        return this.element;
     }
 
     private _registerEvents(eventBus) {
-        eventBus.on(Components.EVENTS.INIT, this.init.bind(this));
+        eventBus.on(Components.EVENTS.INIT, this._init.bind(this));
         eventBus.on(Components.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
         eventBus.on(Components.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
         eventBus.on(Components.EVENTS.FLOW_RENDER, this._render.bind(this));
@@ -131,6 +135,8 @@ class Components {
 
         Object.entries(propsAndChildren).forEach(([key, value]) => {
             if (value instanceof Components) {
+                children[key] = value;
+            } else if (Array.isArray(value) && value.every(v => (v instanceof Components))) {
                 children[key] = value;
             } else {
                 props[key] = value;
@@ -179,19 +185,19 @@ class Components {
         const {events = {}} = this.props;
 
         Object.keys(events).forEach((eventName) => {
-            this._element?.addEventListener(eventName, events[eventName]);
+            this.element?.addEventListener(eventName, events[eventName]);
         });
     }
 
     private _removeEvents() {
         const events: Record<string, () => void> = (this.props as any).events;
 
-        if (!events || !this._element) {
+        if (!events || !this.element) {
             return;
         }
 
         Object.entries(events).forEach(([event, listener]) => {
-            this._element!.removeEventListener(event, listener);
+            this.element!.removeEventListener(event, listener);
         });
     }
 }

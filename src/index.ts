@@ -13,44 +13,46 @@ import {ProfilePage} from './pages/Profile/profilePage';
 import {ProfileChangePasswordPage} from './pages/Profile/ChangePassword/profileChangePasswordPage';
 import {ProfileChangePage} from './pages/Profile/Change/profileChangePage';
 import {RegistrationPage} from './pages/Registration/registrationPage';
-
-components.forEach((component: Components) => {
-    registerComponent(component.componentName, component);
-});
+import router from './utils/Router';
+import AuthController from './controllers/AuthController';
 
 window.addEventListener('DOMContentLoaded', () => {
-    const root = document.querySelector('#app');
+    components.forEach((component: Components) => {
+        registerComponent(component.componentName, component);
+    });
 
-    const path = window.location.pathname;
+    router
+        .use('/', AuthorizationPage)
+        .use('/sign-up', RegistrationPage)
+        .use('/messenger', ChatPage)
+        .use('/settings', ProfilePage)
+        .use('/settings/change', ProfileChangePage)
+        .use('/settings/change/password', ProfileChangePasswordPage)
+        .use('/500', Error500Page)
+        .use('/404', Error404Page);
 
-    let homePage;
-    switch (path) {
+    let isProtectedRoute = true;
+
+    switch (window.location.pathname) {
         case '/':
-        case '/authorization':
-            homePage = new AuthorizationPage();
-            break;
-        case '/profile':
-            homePage = new ProfilePage();
-            break;
-        case '/profile/change':
-            homePage = new ProfileChangePage();
-            break;
-        case '/profile/change/password':
-            homePage = new ProfileChangePasswordPage();
-            break;
-        case '/registration':
-            homePage = new RegistrationPage();
-            break;
-        case '/chats':
-            homePage = new ChatPage();
-            break;
-        case '/500':
-            homePage = new Error500Page();
-            break;
-        default:
-            homePage = new Error404Page();
+        case '/sign-up':
+            isProtectedRoute = false;
             break;
     }
 
-    root.append(homePage.getContent());
+    try {
+        AuthController.fetchUser();
+
+        router.start();
+
+        if (!isProtectedRoute) {
+            router.go('/messenger');
+        }
+    } catch (e) {
+        router.start();
+
+        if (isProtectedRoute) {
+            router.go('/');
+        }
+    }
 });

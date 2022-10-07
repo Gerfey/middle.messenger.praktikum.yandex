@@ -1,30 +1,31 @@
 <div class="profile">
     <div class="sidebar-with-back-btn">
-        <a class="sidebar-with-back-btn__button" href="/chats"><-</a>
+        {{# Link to="/messenger" className="sidebar-with-back-btn__button" }}<-{{/Link}}
     </div>
     <div class="profile-container">
         <div class="profile-information">
-            <div class="profile-information__image"></div>
-            <div class="profile-information__username">Иван</div>
+            {{{ ProfileImage path=avatar className="profile-information__image" onClick=clickByImage onChange=onChange }}}
+            <div class="profile-information__username">{{display_name}}</div>
             <div class="profile-information__items">
-                {{{ ProfileItems label="Почта" type="email" name="email" value="pochta@yandex.ru"
+                {{{ ProfileItems label="Почта" type="email" name="email" value=email
                                  readonly="readonly" }}}
-                {{{ ProfileItems label="Логин" type="text" name="login" value="ivanivanov" readonly="readonly" }}}
-                {{{ ProfileItems label="Имя" type="text" name="first_name" value="Иван" readonly="readonly" }}}
-                {{{ ProfileItems label="Фамилия" type="text" name="second_name" value="Иванов" readonly="readonly" }}}
-                {{{ ProfileItems label="Имя в чате" type="text" name="chat_name" value="Иван" readonly="readonly" }}}
-                {{{ ProfileItems label="Телефон" type="tel" name="phone" value="+7 (909) 967 30 30"
+                {{{ ProfileItems label="Логин" type="text" name="login" value=login readonly="readonly" }}}
+                {{{ ProfileItems label="Имя" type="text" name="first_name" value=first_name readonly="readonly" }}}
+                {{{ ProfileItems label="Фамилия" type="text" name="second_name" value=second_name
+                                 readonly="readonly" }}}
+                {{{ ProfileItems label="Имя в чате" type="text" name="display_name" value=display_name readonly="readonly" }}}
+                {{{ ProfileItems label="Телефон" type="tel" name="phone" value=phone
                                  readonly="readonly" }}}
             </div>
             <div class="profile-information__edit-items">
                 <div class="edit-item">
-                    <a class="edit-item__link" href="/profile/change">Изменить данные</a>
+                    {{# Link to="/settings/change" className="edit-item__link" }}Изменить данные{{/Link}}
                 </div>
                 <div class="edit-item">
-                    <a class="edit-item__link" href="/profile/change/password">Изменить пароль</a>
+                    {{# Link to="/settings/change/password" className="edit-item__link" }}Изменить пароль{{/Link}}
                 </div>
                 <div class="edit-item">
-                    <a class="edit-item__link text-danger">Выйти</a>
+                    {{{ Button label="Выйти" className="edit-item__link text-danger" onClick=onExit }}}
                 </div>
             </div>
         </div>

@@ -1,42 +1,89 @@
 import Components from '../../utils/Components';
 import template from './chat.hbs';
 import './chat.scss';
-import {Validator} from '../../utils/Validator';
+import {withStore} from '../../utils/Store';
+import ChatsController from '../../controllers/ChatsController';
+import FormItem from '../../components/FormItem';
 
-export class ChatPage extends Components {
+export default class ChatPageBase extends Components {
     constructor() {
         super({
-            sendValues: () => {
-                const element = this.getContent();
+            clickCreateChat: (e: PointerEvent) => {
+                e.preventDefault();
+                console.log('chat-create');
 
-                const form = element?.querySelector('form');
+                const overlay = document.querySelector('#overlay-modal');
+                const modalElem = document.querySelector('.modal[data-modal="chats_create"]');
 
-                if (form !== undefined) {
-                    const input = form?.querySelector('input');
+                modalElem.classList.add('active');
+                overlay.classList.add('active');
 
-                    const data: Record<string, unknown> = {};
+                overlay.addEventListener('click', (e) => {
+                    modalElem.classList.remove('active');
+                    overlay.classList.remove('active');
+                });
+            },
+            sendCreateUser: () => {
+                console.log('create user');
 
-                    const validator = new Validator();
+                const values = Object
+                    .values(this.children)
+                    .filter(child => child instanceof FormItem)
+                    .filter(child => child.element?.className.match('chats_user_create'))
+                    .map((child) => ([(child as FormItem).getName(), (child as FormItem).getValue()]));
 
-                    let sendForm = true;
+                console.log(values);
 
-                    if (input) {
-                        data[input.name] = input.value;
+                const data = Object.fromEntries(values);
 
-                        const resultValidation = validator.validate(input.name, input.value);
+                ChatsController.addUserInChat(data, this.props.selectedChatId);
+            },
+            sendDeleteUser: () => {
+                console.log('delete user');
 
-                        sendForm = resultValidation.result;
-                    }
+                const values = Object
+                    .values(this.children)
+                    .filter(child => child instanceof FormItem)
+                    .filter(child => child.element?.className.match('chats_user_remove'))
+                    .map((child) => ([(child as FormItem).getName(), (child as FormItem).getValue()]));
 
-                    if (sendForm) {
-                        console.log(data);
-                    }
-                }
+                console.log(values);
+
+                const data = Object.fromEntries(values);
+
+                console.log(data);
+
+                ChatsController.removeUserInChat(data);
+            },
+            sendCreateChat: () => {
+                console.log('create chat');
+
+                const values = Object
+                    .values(this.children)
+                    .filter(child => child instanceof FormItem)
+                    .filter(child => child.element?.className.match('chats_create'))
+                    .map((child) => ([(child as FormItem).getName(), (child as FormItem).getValue()]));
+
+                console.log(values);
+
+                const data = Object.fromEntries(values);
+
+                console.log(data);
+
+                ChatsController.createChat(data);
             },
         });
+    }
+
+    init() {
+        ChatsController.fetchChats();
     }
 
     protected render(): DocumentFragment {
         return this.compile(template, this.props);
     }
 }
+
+const withChatPage = withStore((state) => (state));
+
+export const ChatPage = withChatPage(ChatPageBase);
