@@ -1,7 +1,7 @@
 import {EventBus} from './EventBus';
 import {nanoid} from 'nanoid';
 
-class Components {
+class Components<P extends Record<string, any> = any> {
     public static EVENTS = {
         INIT: 'init',
         FLOW_CDM: 'flow:component-did-mount',
@@ -13,29 +13,25 @@ class Components {
     public id = nanoid(6);
     public children: Record<string, Components>;
     public refs: Record<string, Components> = {};
-    public props: Record<string, any>;
+    public props: P;
 
     public element: HTMLElement | null = null;
-    private _meta: { props: any };
     private _eventBus: () => EventBus;
 
     static componentName: string | undefined;
 
-    constructor(propsAndChildren: object = {}) {
+    constructor(propsAndChildren: P) {
         const eventBus = new EventBus();
+
         const {children, props} = this._getChildren(propsAndChildren);
 
         this.children = children;
-
-        this._meta = {
-            props,
-        };
-
         this.props = this._makePropsProxy(props);
 
         this._eventBus = () => eventBus;
 
         this._registerEvents(eventBus);
+
         eventBus.emit(Components.EVENTS.INIT);
     }
 
@@ -58,6 +54,7 @@ class Components {
             stub.replaceWith(content);
 
             if (stub.childNodes.length) {
+                // @ts-ignore
                 content.append(...stub.childNodes);
             }
         });
@@ -77,11 +74,11 @@ class Components {
         this._eventBus().emit(Components.EVENTS.FLOW_CDM);
     }
 
-    protected componentDidUpdate(oldProps, newProps) {
+    protected componentDidUpdate(oldProps: P, newProps: P) {
         return JSON.stringify(oldProps) === JSON.stringify(newProps);
     }
 
-    public setProps = (nextProps) => {
+    public setProps = (nextProps: P) => {
         if (!nextProps) {
             return;
         }
@@ -117,11 +114,7 @@ class Components {
         this._addEvents();
     }
 
-    private get element() {
-        return this.element;
-    }
-
-    private _registerEvents(eventBus) {
+    private _registerEvents(eventBus: EventBus) {
         eventBus.on(Components.EVENTS.INIT, this._init.bind(this));
         eventBus.on(Components.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
         eventBus.on(Components.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
@@ -129,21 +122,21 @@ class Components {
         eventBus.on(Components.EVENTS.FLOW_ADD_EVENTS, this._addEvents.bind(this));
     }
 
-    private _getChildren(propsAndChildren) {
-        const children: Record<string, Components> = {};
-        const props: Record<string, any> = {};
+    private _getChildren(propsAndChildren: P): { props: P, children: Record<string, Components> } {
+        const children: Record<string, Components | Components[]> = {};
+        const props: Record<string, unknown> = {};
 
         Object.entries(propsAndChildren).forEach(([key, value]) => {
             if (value instanceof Components) {
-                children[key] = value;
-            } else if (Array.isArray(value) && value.every(v => (v instanceof Components))) {
-                children[key] = value;
+                children[key as string] = value;
+            } else if (Array.isArray(value) && value.length > 0 && value.every(v => (v instanceof Components))) {
+                children[key as string] = value;
             } else {
                 props[key] = value;
             }
         });
 
-        return {children, props};
+        return {children: children as Record<any, Components>, props: props as P};
     }
 
     private _componentDidMount() {
@@ -154,23 +147,23 @@ class Components {
         });
     }
 
-    private _componentDidUpdate(oldProps: any, newProps: any) {
+    private _componentDidUpdate(oldProps: P, newProps: P) {
         if (!this.componentDidUpdate(oldProps, newProps)) {
             this._eventBus().emit(Components.EVENTS.FLOW_RENDER);
         }
     }
 
-    private _makePropsProxy(props: Record<string, any>) {
+    private _makePropsProxy(props: P) {
         const self = this;
 
         return new Proxy(props, {
-            get(target: Record<string, any>, p: string) {
-                const value = target[p];
+            get(target: P, p: string) {
+                const value = target[p as keyof P];
                 return typeof value === 'function' ? value.bind(target) : value;
             },
-            set(target: Record<string, any>, p: string, value) {
+            set(target: P, p: string, value) {
                 const oldProps = {...target};
-                target[p] = value;
+                target[p as keyof P] = value;
 
                 self._eventBus().emit(Components.EVENTS.FLOW_CDU, oldProps, target);
                 return true;

@@ -80,7 +80,7 @@ export default class HTTPTransport {
                 xhr.open(method, url);
             }
 
-            xhr.onreadystatechange = (e) => {
+            xhr.onreadystatechange = () => {
 
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status < 400) {
@@ -99,7 +99,9 @@ export default class HTTPTransport {
                 xhr.withCredentials = options.withCredentials;
             }
 
-            xhr.timeout = timeout;
+            if (timeout !== undefined) {
+                xhr.timeout = timeout;
+            }
             xhr.withCredentials = true;
             xhr.responseType = 'json';
 
