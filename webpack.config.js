@@ -4,7 +4,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV == 'production';
-
+const webpack = require('webpack');
 
 const config = {
     entry: './src/index.ts',
@@ -19,6 +19,7 @@ const config = {
         new HtmlWebpackPlugin({
             template: 'src/index.html',
         }),
+        new webpack.DefinePlugin({'process.env': {}}),
 
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/
@@ -31,7 +32,9 @@ const config = {
                     {
                         loader: 'handlebars-loader',
                         options: {
-                            knownHelpersOnly: false,
+                            precompileOptions: {
+                                knownHelpersOnly: false,
+                            }
                         },
                     }
                 ]
@@ -52,13 +55,7 @@ const config = {
                 test: /\.s[ac]ss$/i,
                 use: [
                     'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: true,
-                            importLoaders: 2
-                        }
-                    },
+                    'css-loader',
                     'postcss-loader',
                     'sass-loader'],
             },
