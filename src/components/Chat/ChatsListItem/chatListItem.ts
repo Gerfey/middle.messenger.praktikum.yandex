@@ -1,14 +1,13 @@
 import Components from '../../../utils/Components';
 import template from './chatListItem.hbs';
-import ChatsController from "../../../controllers/ChatsController";
-import {withStore} from "../../../utils/Store";
+import ChatsController from '../../../controllers/ChatsController';
 
 interface ChatListItemProps {
     chatItem: any,
     userInformation: any
 }
 
-export class ChatListItem extends Components<ChatsItemProps> {
+export class ChatListItem extends Components<ChatListItemProps> {
     static componentName = 'ChatListItem';
 
     constructor({chatItem, userInformation}: ChatListItemProps) {

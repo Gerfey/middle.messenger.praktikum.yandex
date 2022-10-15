@@ -1,7 +1,4 @@
 {
-    "ts-node": {
-        "files": true
-    },
     "compilerOptions": {
         "outDir": "dist",
         "target": "es2017",
@@ -25,5 +22,9 @@
             "ESNext",
             "DOM"
         ]
+    },
+    "ts-node": {
+        "files": true
     }
 }
+

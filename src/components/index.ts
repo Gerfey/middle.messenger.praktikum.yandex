@@ -9,8 +9,8 @@ import {ComponentInterface} from '../utils/registerComponent';
 import ProfileImage from './ImageProfile';
 import ChatList from './Chat/ChatsList';
 import ChatUsersDropdown from './Dropdown/ChatUsers';
-import ChatListItem from './Chat/ChatsListItem';
 import ChatMessages from './Chat/ChatMessages';
+import ChatListItem from "./Chat/ChatsListItem";
 
 export const components: ComponentInterface<any>[] = [
     Button,
@@ -23,6 +23,6 @@ export const components: ComponentInterface<any>[] = [
     ProfileImage,
     ChatList,
     ChatUsersDropdown,
-    ChatListItem,
     ChatMessages,
+    ChatListItem,
 ];
