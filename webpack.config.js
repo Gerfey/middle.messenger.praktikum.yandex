@@ -3,7 +3,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const isProduction = process.env.NODE_ENV == 'production';
+const isProduction = process.env.NODE_ENV === 'production';
 const webpack = require('webpack');
 
 const config = {
@@ -14,6 +14,8 @@ const config = {
     devServer: {
         host: 'localhost',
         port: 3000,
+        compress: true,
+        historyApiFallback: true,
     },
     plugins: [
         new HtmlWebpackPlugin({
