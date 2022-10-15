@@ -1,7 +1,7 @@
 import API, {ChatsAPI, CreateChat} from '../api/ChatsAPI';
 import store from '../utils/Store';
 import MessagesController from './MessagesController';
-import ProfileController from "./ProfileController";
+import ProfileController from './ProfileController';
 
 export class ChatsController {
     private readonly api: ChatsAPI;

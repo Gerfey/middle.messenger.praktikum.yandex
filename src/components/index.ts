@@ -10,7 +10,7 @@ import ProfileImage from './ImageProfile';
 import ChatList from './Chat/ChatsList';
 import ChatUsersDropdown from './Dropdown/ChatUsers';
 import ChatMessages from './Chat/ChatMessages';
-import ChatListItem from "./Chat/ChatsListItem";
+import ChatListItem from './Chat/ChatsListItem';
 
 export const components: ComponentInterface<any>[] = [
     Button,
