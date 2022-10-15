@@ -5,6 +5,7 @@
     "scripts": {
         "start": "npm run build && node ./server.js",
         "build": "webpack --mode=production --node-env=production",
+        "lint": "npm-run-all stylelint eslint",
         "eslint": "npx eslint \"src\"",
         "stylelint": "npx stylelint \"**/*.scss\"",
         "build:dev": "webpack --mode=development",
@@ -68,7 +69,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "npm-run-all test eslint stylelint"
+            "pre-commit": "npm-run-all test lint"
         }
     },
     "engines": {
