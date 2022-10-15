@@ -5,6 +5,7 @@
     "scripts": {
         "start": "npm run build && node ./server.js",
         "build": "webpack --mode=production --node-env=production",
+        "lint": "npm-run-all stylelint eslint",
         "eslint": "npx eslint \"src\"",
         "stylelint": "npx stylelint \"**/*.scss\"",
         "build:dev": "webpack --mode=development",
@@ -31,7 +32,7 @@
         "@types/sinon": "10.0.13",
         "@types/webpack-env": "1.18.0",
         "@typescript-eslint/eslint-plugin": "5.40.0",
-        "@webpack-cli/generators": "0.1.9",
+        "@webpack-cli/generators": "2.5.0",
         "autoprefixer": "10.4.12",
         "chai": "4.3.6",
         "css-loader": "6.7.1",
@@ -40,8 +41,10 @@
         "eslint-plugin-html": "7.1.0",
         "handlebars-loader": "1.7.2",
         "html-webpack-plugin": "5.5.0",
+        "husky": "8.0.1",
         "jsdom": "20.0.1",
         "mocha": "10.0.0",
+        "npm-run-all": "4.1.5",
         "path-browserify": "1.0.1",
         "postcss": "8.4.18",
         "postcss-loader": "7.0.1",
@@ -64,6 +67,11 @@
         "webpack": "5.74.0",
         "webpack-cli": "4.10.0",
         "webpack-dev-server": "4.11.1"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm-run-all test lint"
+        }
     },
     "engines": {
         "npm": ">=7.0.0"

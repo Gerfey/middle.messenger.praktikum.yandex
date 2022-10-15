@@ -32,6 +32,7 @@ export default class Route {
 
     render() {
         if (!this.block) {
+            // eslint-disable-next-line new-cap
             this.block = new this.blockClass({});
         }
 

@@ -3,7 +3,7 @@ import template from './chatMessages.hbs';
 import {withStore} from '../../../utils/Store';
 import MessagesController from '../../../controllers/MessagesController';
 import Components from '../../../utils/Components';
-import {Validator} from "../../../utils/Validator";
+import {Validator} from '../../../utils/Validator';
 
 interface ChatMessagesProps {
     chatId: number;

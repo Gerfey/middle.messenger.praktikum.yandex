@@ -97,6 +97,7 @@ class Components<P extends Record<string, any> = any> {
         this._eventBus().emit(Components.EVENTS.FLOW_ADD_EVENTS);
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     public init(): void {}
 
     private _render() {

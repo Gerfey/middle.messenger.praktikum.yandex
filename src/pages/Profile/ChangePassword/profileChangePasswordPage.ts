@@ -3,7 +3,7 @@ import template from './profile.hbs';
 import AuthController from '../../../controllers/AuthController';
 import ProfileItems from '../../../components/Profile/Item';
 import ProfileController from '../../../controllers/ProfileController';
-import {withStore} from "../../../utils/Store";
+import {withStore} from '../../../utils/Store';
 
 export class ProfileChangePasswordPageBase extends Components {
     constructor() {
