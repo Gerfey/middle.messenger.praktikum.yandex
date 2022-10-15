@@ -18,7 +18,8 @@ export class Link extends Components {
                 click: (e: MouseEvent) => {
                     e.preventDefault();
 
-                    router.go(to);
+                    // @ts-ignore
+                    router.go(this.props.to);
                 },
             },
         });

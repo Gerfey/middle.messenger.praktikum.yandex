@@ -1,6 +1,6 @@
 import Components from './Components';
 import {HelperOptions} from 'handlebars';
-import Handlebars from 'handlebars/dist/handlebars.runtime';
+import Handlebars from 'handlebars/runtime';
 
 const util = require('handlebars-utils');
 const moment = require('moment');
@@ -39,7 +39,7 @@ export function registerComponent(name: string, Component: ComponentInterface<an
         });
 }
 
-Handlebars.registerHelper('compare', function (a, operator, b, options) {
+Handlebars.registerHelper('compare', function (a: any, operator: string, b: any, options: any) {
     let result;
     switch (operator) {
         case '==':
@@ -77,12 +77,12 @@ Handlebars.registerHelper('compare', function (a, operator, b, options) {
     return util.value(result, this, options);
 });
 
-Handlebars.registerHelper('formatTime', function (date, format) {
+Handlebars.registerHelper('formatTime', function (date: any, format: any) {
     const mmnt = moment(date);
     return mmnt.format(format);
 });
 
-Handlebars.registerHelper('foreach', function (arr, options) {
+Handlebars.registerHelper('foreach', function (arr: any, options: any) {
     if (arr === undefined) {
         return options.inverse(this);
     }
@@ -91,7 +91,7 @@ Handlebars.registerHelper('foreach', function (arr, options) {
         return options.inverse(this);
     }
 
-    return arr.map(function (item, index) {
+    return arr.map(function (item: any, index: any) {
         item.$index = index;
         item.$first = index === 0;
         item.$last = index === arr.length - 1;
