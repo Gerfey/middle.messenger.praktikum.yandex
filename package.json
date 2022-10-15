@@ -40,6 +40,7 @@
         "eslint-plugin-html": "7.1.0",
         "handlebars-loader": "1.7.2",
         "html-webpack-plugin": "5.5.0",
+        "husky": "8.0.1",
         "jsdom": "20.0.1",
         "mocha": "10.0.0",
         "path-browserify": "1.0.1",
@@ -64,6 +65,11 @@
         "webpack": "5.74.0",
         "webpack-cli": "4.10.0",
         "webpack-dev-server": "4.11.1"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm-run-all test eslint stylelint"
+        }
     },
     "engines": {
         "npm": ">=7.0.0"
