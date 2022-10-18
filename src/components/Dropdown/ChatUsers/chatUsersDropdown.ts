@@ -2,14 +2,10 @@ import template from './chatUsersDropdown.hbs';
 import Components from '../../../utils/Components';
 import './style.scss';
 
-interface ChatUsersDropdownProps {
-
-}
-
-export class ChatUsersDropdown extends Components<ChatUsersDropdownProps> {
+export class ChatUsersDropdown extends Components {
     static componentName = 'ChatUsersDropdown';
 
-    constructor(props: ChatUsersDropdownProps) {
+    constructor() {
         super({
             events: {
                 click: (e: PointerEvent) => {

@@ -73,14 +73,16 @@ class Router {
 export default new Router('#app');
 
 export interface WithRouterProps {
-    router: Router
+    router: typeof Router;
 }
 
-export function withRouter(Component: typeof Components) {
+export function withRouter(Component: typeof Components<any>) {
+    type Props = typeof Component extends typeof Components<infer P extends Record<string, any>> ? P : any;
+
     return class WithRouter extends Component {
         public static componentName = Component.componentName;
 
-        constructor(props: any) {
+        constructor(props: Props & WithRouterProps) {
             super({...props, router: new Router('#app')});
         }
     };
